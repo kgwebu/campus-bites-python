@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assignment 1. Lunch Rush Calculator | Campus Bites Python</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+  try { var t = localStorage.getItem("cb-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  window.PYODIDE_URL = new URL("https://cdn.jsdelivr.net/pyodide/v0.26.4/full/", document.baseURI).href;
+  window.COURSE_ROOT = "../";
+</script>
+</head>
+<body data-kind="doc" data-pid="extras/assignment-1" data-edition="student" data-class="0">
+<header class="topbar">
+  <button class="icon-btn menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar" type="button">☰</button>
+  <a class="brand" href="../index.html"><span class="brand-mark">☕</span> Campus Bites Python</a>
+  <input class="search" type="search" placeholder="Search lessons…" aria-label="Search lessons">
+  <div class="top-right">
+    
+    <span class="xp" title="Experience points">⭐ <b data-xp>0</b></span>
+    <button class="icon-btn theme-toggle" aria-label="Switch light and dark theme" type="button">🌓</button>
+  </div>
+</header>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Lessons">
+    <div class="progress"><div class="progress-bar"><span></span></div><div class="progress-text"></div></div>
+    <details class="m-chap" data-chapter="1"><summary><span>👋 1. Python basics</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-01/00-warmup.html" data-id="chapter-01/00-warmup"><span class="tick"></span><span class="num">1.0</span> 🔥 Welcome to the café</a></li><li><a href="../chapters/chapter-01/01-what-is-python.html" data-id="chapter-01/01-what-is-python"><span class="tick"></span><span class="num">1.1</span> What is Python?</a></li><li><a href="../chapters/chapter-01/02-your-first-program.html" data-id="chapter-01/02-your-first-program"><span class="tick"></span><span class="num">1.2</span> Your first program</a></li><li><a href="../chapters/chapter-01/03-meet-the-cafe.html" data-id="chapter-01/03-meet-the-cafe"><span class="tick"></span><span class="num">1.3</span> Meet the café</a></li><li><a href="../chapters/chapter-01/04-reading-errors.html" data-id="chapter-01/04-reading-errors"><span class="tick"></span><span class="num">1.4</span> Reading error messages</a></li><li><a href="../chapters/chapter-01/05-variables.html" data-id="chapter-01/05-variables"><span class="tick"></span><span class="num">1.5</span> Python Variables</a></li><li><a href="../chapters/chapter-01/06-naming-variables.html" data-id="chapter-01/06-naming-variables"><span class="tick"></span><span class="num">1.6</span> Naming variables</a></li><li><a href="../chapters/chapter-01/07-numbers.html" data-id="chapter-01/07-numbers"><span class="tick"></span><span class="num">1.7</span> Numbers</a></li><li><a href="../chapters/chapter-01/08-math-operators.html" data-id="chapter-01/08-math-operators"><span class="tick"></span><span class="num">1.8</span> Math operators</a></li><li><a href="../chapters/chapter-01/09-order-of-operations.html" data-id="chapter-01/09-order-of-operations"><span class="tick"></span><span class="num">1.9</span> Brackets and order</a></li><li><a href="../chapters/chapter-01/10-rounding-remainders.html" data-id="chapter-01/10-rounding-remainders"><span class="tick"></span><span class="num">1.10</span> Rounding and remainders</a></li><li><a href="../chapters/chapter-01/11-strings.html" data-id="chapter-01/11-strings"><span class="tick"></span><span class="num">1.11</span> Strings</a></li><li><a href="../chapters/chapter-01/12-string-methods.html" data-id="chapter-01/12-string-methods"><span class="tick"></span><span class="num">1.12</span> String methods</a></li><li><a href="../chapters/chapter-01/13-f-strings-and-money.html" data-id="chapter-01/13-f-strings-and-money"><span class="tick"></span><span class="num">1.13</span> f-strings and money</a></li><li><a href="../chapters/chapter-01/14-booleans.html" data-id="chapter-01/14-booleans"><span class="tick"></span><span class="num">1.14</span> Booleans</a></li><li><a href="../chapters/chapter-01/15-type-conversion.html" data-id="chapter-01/15-type-conversion"><span class="tick"></span><span class="num">1.15</span> Type conversion</a></li><li><a href="../chapters/chapter-01/16-input.html" data-id="chapter-01/16-input"><span class="tick"></span><span class="num">1.16</span> Asking with input()</a></li><li><a href="../chapters/chapter-01/90-practice-lab.html" data-id="chapter-01/90-practice-lab"><span class="tick"></span><span class="num">1.Lab</span> 🧪 Practice lab</a></li><li><a href="../chapters/chapter-01/91-class-project.html" data-id="chapter-01/91-class-project"><span class="tick"></span><span class="num">1.Project</span> 🏆 Class project: first sales report</a></li><li><a href="../chapters/chapter-01/quiz.html" data-id="chapter-01/quiz"><span class="tick"></span><span class="num">1.Quiz</span> 📝 Class quiz</a></li></ul></details>
+<details class="m-chap" data-chapter="2"><summary><span>🚦 2. Decisions and loops</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-02/00-warmup.html" data-id="chapter-02/00-warmup"><span class="tick"></span><span class="num">2.0</span> 🔥 Welcome back</a></li><li><a href="../chapters/chapter-02/01-comparison-operators.html" data-id="chapter-02/01-comparison-operators"><span class="tick"></span><span class="num">2.1</span> Comparison operators</a></li><li><a href="../chapters/chapter-02/02-the-if-statement.html" data-id="chapter-02/02-the-if-statement"><span class="tick"></span><span class="num">2.2</span> The if statement</a></li><li><a href="../chapters/chapter-02/03-indentation-and-blocks.html" data-id="chapter-02/03-indentation-and-blocks"><span class="tick"></span><span class="num">2.3</span> Indentation and blocks</a></li><li><a href="../chapters/chapter-02/04-else.html" data-id="chapter-02/04-else"><span class="tick"></span><span class="num">2.4</span> else</a></li><li><a href="../chapters/chapter-02/05-elif.html" data-id="chapter-02/05-elif"><span class="tick"></span><span class="num">2.5</span> elif</a></li><li><a href="../chapters/chapter-02/06-and-or-not.html" data-id="chapter-02/06-and-or-not"><span class="tick"></span><span class="num">2.6</span> and, or, not</a></li><li><a href="../chapters/chapter-02/07-nested-decisions.html" data-id="chapter-02/07-nested-decisions"><span class="tick"></span><span class="num">2.7</span> Nested decisions</a></li><li><a href="../chapters/chapter-02/08-checking-text-with-in.html" data-id="chapter-02/08-checking-text-with-in"><span class="tick"></span><span class="num">2.8</span> Checking text with in</a></li><li><a href="../chapters/chapter-02/09-while-loops.html" data-id="chapter-02/09-while-loops"><span class="tick"></span><span class="num">2.9</span> while loops</a></li><li><a href="../chapters/chapter-02/10-for-loops.html" data-id="chapter-02/10-for-loops"><span class="tick"></span><span class="num">2.10</span> for loops</a></li><li><a href="../chapters/chapter-02/11-range.html" data-id="chapter-02/11-range"><span class="tick"></span><span class="num">2.11</span> range()</a></li><li><a href="../chapters/chapter-02/12-break-and-continue.html" data-id="chapter-02/12-break-and-continue"><span class="tick"></span><span class="num">2.12</span> break and continue</a></li><li><a href="../chapters/chapter-02/13-counting-and-adding-up.html" data-id="chapter-02/13-counting-and-adding-up"><span class="tick"></span><span class="num">2.13</span> Counting and adding up</a></li><li><a href="../chapters/chapter-02/14-loops-inside-loops.html" data-id="chapter-02/14-loops-inside-loops"><span class="tick"></span><span class="num">2.14</span> Loops inside loops</a></li><li><a href="../chapters/chapter-02/15-text-bar-charts.html" data-id="chapter-02/15-text-bar-charts"><span class="tick"></span><span class="num">2.15</span> Text bar charts</a></li><li><a href="../chapters/chapter-02/90-practice-lab.html" data-id="chapter-02/90-practice-lab"><span class="tick"></span><span class="num">2.Lab</span> 🧪 Practice lab</a></li><li><a href="../chapters/chapter-02/91-class-project.html" data-id="chapter-02/91-class-project"><span class="tick"></span><span class="num">2.Project</span> 🏆 Class project: the lunch rush</a></li><li><a href="../chapters/chapter-02/quiz.html" data-id="chapter-02/quiz"><span class="tick"></span><span class="num">2.Quiz</span> 📝 Class quiz</a></li></ul></details>
+<details class="m-chap" data-chapter="3"><summary><span>🧺 3. Collections</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-03/00-warmup.html" data-id="chapter-03/00-warmup"><span class="tick"></span><span class="num">3.0</span> 🔥 Welcome back</a></li><li><a href="../chapters/chapter-03/01-lists.html" data-id="chapter-03/01-lists"><span class="tick"></span><span class="num">3.1</span> Python Lists</a></li><li><a href="../chapters/chapter-03/02-list-positions.html" data-id="chapter-03/02-list-positions"><span class="tick"></span><span class="num">3.2</span> List positions</a></li><li><a href="../chapters/chapter-03/03-slicing.html" data-id="chapter-03/03-slicing"><span class="tick"></span><span class="num">3.3</span> Slicing</a></li><li><a href="../chapters/chapter-03/04-changing-lists.html" data-id="chapter-03/04-changing-lists"><span class="tick"></span><span class="num">3.4</span> Changing lists</a></li><li><a href="../chapters/chapter-03/05-removing-items.html" data-id="chapter-03/05-removing-items"><span class="tick"></span><span class="num">3.5</span> Removing items</a></li><li><a href="../chapters/chapter-03/06-list-tools.html" data-id="chapter-03/06-list-tools"><span class="tick"></span><span class="num">3.6</span> List tools</a></li><li><a href="../chapters/chapter-03/07-looping-over-a-list.html" data-id="chapter-03/07-looping-over-a-list"><span class="tick"></span><span class="num">3.7</span> Looping over a list</a></li><li><a href="../chapters/chapter-03/08-counting-and-searching.html" data-id="chapter-03/08-counting-and-searching"><span class="tick"></span><span class="num">3.8</span> Counting and searching lists</a></li><li><a href="../chapters/chapter-03/09-tuples.html" data-id="chapter-03/09-tuples"><span class="tick"></span><span class="num">3.9</span> Tuples</a></li><li><a href="../chapters/chapter-03/10-enumerate-and-zip.html" data-id="chapter-03/10-enumerate-and-zip" class="extra"><span class="tick"></span><span class="num">3.10</span> ✨ enumerate and zip</a></li><li><a href="../chapters/chapter-03/11-sets.html" data-id="chapter-03/11-sets" class="extra"><span class="tick"></span><span class="num">3.11</span> ✨ Sets</a></li><li><a href="../chapters/chapter-03/12-dictionaries.html" data-id="chapter-03/12-dictionaries"><span class="tick"></span><span class="num">3.12</span> Dictionaries</a></li><li><a href="../chapters/chapter-03/13-changing-dictionaries.html" data-id="chapter-03/13-changing-dictionaries"><span class="tick"></span><span class="num">3.13</span> Changing and reading dictionaries</a></li><li><a href="../chapters/chapter-03/14-looping-over-dictionaries.html" data-id="chapter-03/14-looping-over-dictionaries"><span class="tick"></span><span class="num">3.14</span> Looping over dictionaries</a></li><li><a href="../chapters/chapter-03/15-lists-of-dictionaries.html" data-id="chapter-03/15-lists-of-dictionaries"><span class="tick"></span><span class="num">3.15</span> Lists of dictionaries</a></li><li><a href="../chapters/chapter-03/16-list-comprehensions.html" data-id="chapter-03/16-list-comprehensions" class="extra"><span class="tick"></span><span class="num">3.16</span> ✨ List comprehensions</a></li><li><a href="../chapters/chapter-03/90-practice-lab.html" data-id="chapter-03/90-practice-lab"><span class="tick"></span><span class="num">3.Lab</span> 🧪 Practice lab</a></li><li><a href="../chapters/chapter-03/91-class-project.html" data-id="chapter-03/91-class-project"><span class="tick"></span><span class="num">3.Project</span> 🏆 Class project: the menu and the order book</a></li><li><a href="../chapters/chapter-03/quiz.html" data-id="chapter-03/quiz"><span class="tick"></span><span class="num">3.Quiz</span> 📝 Class quiz</a></li></ul></details>
+<details class="m-chap" data-chapter="4"><summary><span>🧰 4. Functions and modules</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-04/00-warmup.html" data-id="chapter-04/00-warmup"><span class="tick"></span><span class="num">4.0</span> 🔥 Welcome back to the café</a></li><li><a href="../chapters/chapter-04/01-why-functions.html" data-id="chapter-04/01-why-functions"><span class="tick"></span><span class="num">4.1</span> Why functions?</a></li><li><a href="../chapters/chapter-04/02-defining-and-calling.html" data-id="chapter-04/02-defining-and-calling"><span class="tick"></span><span class="num">4.2</span> Defining and calling a function</a></li><li><a href="../chapters/chapter-04/03-parameters.html" data-id="chapter-04/03-parameters"><span class="tick"></span><span class="num">4.3</span> Parameters</a></li><li><a href="../chapters/chapter-04/04-return.html" data-id="chapter-04/04-return"><span class="tick"></span><span class="num">4.4</span> return</a></li><li><a href="../chapters/chapter-04/05-return-vs-print.html" data-id="chapter-04/05-return-vs-print"><span class="tick"></span><span class="num">4.5</span> return vs print</a></li><li><a href="../chapters/chapter-04/06-default-values.html" data-id="chapter-04/06-default-values"><span class="tick"></span><span class="num">4.6</span> Default values</a></li><li><a href="../chapters/chapter-04/07-keyword-arguments.html" data-id="chapter-04/07-keyword-arguments"><span class="tick"></span><span class="num">4.7</span> Keyword arguments</a></li><li><a href="../chapters/chapter-04/08-variables-inside-functions.html" data-id="chapter-04/08-variables-inside-functions"><span class="tick"></span><span class="num">4.8</span> Variables inside functions</a></li><li><a href="../chapters/chapter-04/09-writing-good-functions.html" data-id="chapter-04/09-writing-good-functions"><span class="tick"></span><span class="num">4.9</span> Writing good functions</a></li><li><a href="../chapters/chapter-04/10-functions-calling-functions.html" data-id="chapter-04/10-functions-calling-functions"><span class="tick"></span><span class="num">4.10</span> Functions that call functions</a></li><li><a href="../chapters/chapter-04/11-functions-with-lists-and-dictionaries.html" data-id="chapter-04/11-functions-with-lists-and-dictionaries"><span class="tick"></span><span class="num">4.11</span> Functions with lists and dictionaries</a></li><li><a href="../chapters/chapter-04/12-lambda-and-sorted.html" data-id="chapter-04/12-lambda-and-sorted" class="extra"><span class="tick"></span><span class="num">4.12</span> ✨ lambda and sorted</a></li><li><a href="../chapters/chapter-04/13-map-and-filter.html" data-id="chapter-04/13-map-and-filter" class="extra"><span class="tick"></span><span class="num">4.13</span> ✨ map and filter</a></li><li><a href="../chapters/chapter-04/14-checking-with-assert.html" data-id="chapter-04/14-checking-with-assert"><span class="tick"></span><span class="num">4.14</span> Checking functions with assert</a></li><li><a href="../chapters/chapter-04/15-modules.html" data-id="chapter-04/15-modules"><span class="tick"></span><span class="num">4.15</span> Modules and the standard library</a></li><li><a href="../chapters/chapter-04/90-practice-lab.html" data-id="chapter-04/90-practice-lab"><span class="tick"></span><span class="num">4.Lab</span> 🧪 Practice lab</a></li><li><a href="../chapters/chapter-04/91-class-project.html" data-id="chapter-04/91-class-project"><span class="tick"></span><span class="num">4.Project</span> 🏆 Class project: the café toolkit</a></li><li><a href="../chapters/chapter-04/quiz.html" data-id="chapter-04/quiz"><span class="tick"></span><span class="num">4.Quiz</span> 📝 Class quiz</a></li></ul></details>
+<details class="m-chap" data-chapter="5"><summary><span>📁 5. Files, errors and classes</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-05/00-warmup.html" data-id="chapter-05/00-warmup"><span class="tick"></span><span class="num">5.0</span> 🔥 Welcome back</a></li><li><a href="../chapters/chapter-05/01-reading-a-text-file.html" data-id="chapter-05/01-reading-a-text-file"><span class="tick"></span><span class="num">5.1</span> Reading a text file</a></li><li><a href="../chapters/chapter-05/02-writing-a-file.html" data-id="chapter-05/02-writing-a-file"><span class="tick"></span><span class="num">5.2</span> Writing a file</a></li><li><a href="../chapters/chapter-05/03-the-with-statement.html" data-id="chapter-05/03-the-with-statement"><span class="tick"></span><span class="num">5.3</span> The with statement</a></li><li><a href="../chapters/chapter-05/04-looping-over-lines.html" data-id="chapter-05/04-looping-over-lines"><span class="tick"></span><span class="num">5.4</span> Looping over lines</a></li><li><a href="../chapters/chapter-05/05-csv-files.html" data-id="chapter-05/05-csv-files"><span class="tick"></span><span class="num">5.5</span> CSV files</a></li><li><a href="../chapters/chapter-05/06-csv-dictreader.html" data-id="chapter-05/06-csv-dictreader"><span class="tick"></span><span class="num">5.6</span> csv.DictReader</a></li><li><a href="../chapters/chapter-05/07-writing-csv.html" data-id="chapter-05/07-writing-csv"><span class="tick"></span><span class="num">5.7</span> Writing CSV</a></li><li><a href="../chapters/chapter-05/08-json-reading.html" data-id="chapter-05/08-json-reading"><span class="tick"></span><span class="num">5.8</span> JSON: reading</a></li><li><a href="../chapters/chapter-05/09-json-writing.html" data-id="chapter-05/09-json-writing" class="extra"><span class="tick"></span><span class="num">5.9</span> ✨ JSON: writing</a></li><li><a href="../chapters/chapter-05/10-errors-and-tracebacks.html" data-id="chapter-05/10-errors-and-tracebacks"><span class="tick"></span><span class="num">5.10</span> Errors and tracebacks</a></li><li><a href="../chapters/chapter-05/11-try-except.html" data-id="chapter-05/11-try-except"><span class="tick"></span><span class="num">5.11</span> try / except</a></li><li><a href="../chapters/chapter-05/12-specific-errors.html" data-id="chapter-05/12-specific-errors"><span class="tick"></span><span class="num">5.12</span> Handling specific errors</a></li><li><a href="../chapters/chapter-05/13-else-and-finally.html" data-id="chapter-05/13-else-and-finally" class="extra"><span class="tick"></span><span class="num">5.13</span> ✨ else and finally</a></li><li><a href="../chapters/chapter-05/14-raising-errors.html" data-id="chapter-05/14-raising-errors"><span class="tick"></span><span class="num">5.14</span> Checking input and raising errors</a></li><li><a href="../chapters/chapter-05/15-classes-what-and-why.html" data-id="chapter-05/15-classes-what-and-why"><span class="tick"></span><span class="num">5.15</span> Classes: what and why</a></li><li><a href="../chapters/chapter-05/16-init-and-methods.html" data-id="chapter-05/16-init-and-methods"><span class="tick"></span><span class="num">5.16</span> __init__ and methods</a></li><li><a href="../chapters/chapter-05/17-lists-of-objects-and-modules.html" data-id="chapter-05/17-lists-of-objects-and-modules" class="extra"><span class="tick"></span><span class="num">5.17</span> ✨ Lists of objects and your own module</a></li><li><a href="../chapters/chapter-05/90-practice-lab.html" data-id="chapter-05/90-practice-lab"><span class="tick"></span><span class="num">5.Lab</span> 🧪 Practice lab</a></li><li><a href="../chapters/chapter-05/91-class-project.html" data-id="chapter-05/91-class-project"><span class="tick"></span><span class="num">5.Project</span> 🏆 Class project: the safe order loader</a></li><li><a href="../chapters/chapter-05/quiz.html" data-id="chapter-05/quiz"><span class="tick"></span><span class="num">5.Quiz</span> 📝 Class quiz</a></li></ul></details>
+<details class="m-chap" data-chapter="6"><summary><span>📊 6. Data analysis</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-06/00-warmup.html" data-id="chapter-06/00-warmup"><span class="tick"></span><span class="num">6.0</span> 🔥 Welcome back</a></li><li><a href="../chapters/chapter-06/01-why-tables.html" data-id="chapter-06/01-why-tables"><span class="tick"></span><span class="num">6.1</span> Why tables?</a></li><li><a href="../chapters/chapter-06/02-first-dataframe.html" data-id="chapter-06/02-first-dataframe"><span class="tick"></span><span class="num">6.2</span> Your first DataFrame</a></li><li><a href="../chapters/chapter-06/03-read-csv.html" data-id="chapter-06/03-read-csv"><span class="tick"></span><span class="num">6.3</span> Reading orders.csv</a></li><li><a href="../chapters/chapter-06/04-first-look.html" data-id="chapter-06/04-first-look"><span class="tick"></span><span class="num">6.4</span> A first look</a></li><li><a href="../chapters/chapter-06/05-select-columns.html" data-id="chapter-06/05-select-columns"><span class="tick"></span><span class="num">6.5</span> Selecting columns</a></li><li><a href="../chapters/chapter-06/06-select-rows.html" data-id="chapter-06/06-select-rows"><span class="tick"></span><span class="num">6.6</span> Selecting rows</a></li><li><a href="../chapters/chapter-06/07-filter-rows.html" data-id="chapter-06/07-filter-rows"><span class="tick"></span><span class="num">6.7</span> Filtering rows</a></li><li><a href="../chapters/chapter-06/08-sorting.html" data-id="chapter-06/08-sorting"><span class="tick"></span><span class="num">6.8</span> Sorting</a></li><li><a href="../chapters/chapter-06/09-new-columns.html" data-id="chapter-06/09-new-columns"><span class="tick"></span><span class="num">6.9</span> New columns</a></li><li><a href="../chapters/chapter-06/10-messy-data.html" data-id="chapter-06/10-messy-data"><span class="tick"></span><span class="num">6.10</span> Fixing messy data</a></li><li><a href="../chapters/chapter-06/11-dates.html" data-id="chapter-06/11-dates"><span class="tick"></span><span class="num">6.11</span> Dates</a></li><li><a href="../chapters/chapter-06/12-grouping.html" data-id="chapter-06/12-grouping"><span class="tick"></span><span class="num">6.12</span> Grouping</a></li><li><a href="../chapters/chapter-06/13-group-agg.html" data-id="chapter-06/13-group-agg" class="extra"><span class="tick"></span><span class="num">6.13</span> ✨ Grouping by two columns</a></li><li><a href="../chapters/chapter-06/14-merge.html" data-id="chapter-06/14-merge"><span class="tick"></span><span class="num">6.14</span> Joining tables</a></li><li><a href="../chapters/chapter-06/15-charts.html" data-id="chapter-06/15-charts"><span class="tick"></span><span class="num">6.15</span> Charts</a></li><li><a href="../chapters/chapter-06/16-prediction.html" data-id="chapter-06/16-prediction" class="extra"><span class="tick"></span><span class="num">6.16</span> ✨ A simple prediction</a></li><li><a href="../chapters/chapter-06/90-practice-lab.html" data-id="chapter-06/90-practice-lab"><span class="tick"></span><span class="num">6.Lab</span> 🧪 Practice lab</a></li><li><a href="../chapters/chapter-06/91-class-project.html" data-id="chapter-06/91-class-project"><span class="tick"></span><span class="num">6.Project</span> 🏆 Class project: sales by day and product</a></li><li><a href="../chapters/chapter-06/quiz.html" data-id="chapter-06/quiz"><span class="tick"></span><span class="num">6.Quiz</span> 📝 Class quiz</a></li></ul></details>
+<details class="m-chap" data-chapter="7"><summary><span>🏆 7. Final project</span><span class="m-count"></span></summary><ul><li><a href="../chapters/chapter-07/00-warmup.html" data-id="chapter-07/00-warmup"><span class="tick"></span><span class="num">7.0</span> 🔥 Welcome to the final class</a></li><li><a href="../chapters/chapter-07/01-the-python-tour.html" data-id="chapter-07/01-the-python-tour"><span class="tick"></span><span class="num">7.1</span> The Python tour</a></li><li><a href="../chapters/chapter-07/02-read-the-brief.html" data-id="chapter-07/02-read-the-brief"><span class="tick"></span><span class="num">7.2</span> Read the brief</a></li><li><a href="../chapters/chapter-07/03-plan-the-steps.html" data-id="chapter-07/03-plan-the-steps"><span class="tick"></span><span class="num">7.3</span> Plan the steps</a></li><li><a href="../chapters/chapter-07/04-step-1-load-the-files.html" data-id="chapter-07/04-step-1-load-the-files"><span class="tick"></span><span class="num">7.4</span> &quot;Step 1: load the files&quot;</a></li><li><a href="../chapters/chapter-07/05-step-2-clean-the-data.html" data-id="chapter-07/05-step-2-clean-the-data"><span class="tick"></span><span class="num">7.5</span> &quot;Step 2: clean the data&quot;</a></li><li><a href="../chapters/chapter-07/06-step-3-revenue-cost-profit.html" data-id="chapter-07/06-step-3-revenue-cost-profit"><span class="tick"></span><span class="num">7.6</span> &quot;Step 3: revenue, cost and profit&quot;</a></li><li><a href="../chapters/chapter-07/07-step-4-the-profit-chart.html" data-id="chapter-07/07-step-4-the-profit-chart"><span class="tick"></span><span class="num">7.7</span> &quot;Step 4: the daily profit chart&quot;</a></li><li><a href="../chapters/chapter-07/08-step-5-write-the-report.html" data-id="chapter-07/08-step-5-write-the-report"><span class="tick"></span><span class="num">7.8</span> &quot;Step 5: write report.txt and summary.json&quot;</a></li><li><a href="../chapters/chapter-07/09-test-it-with-asserts.html" data-id="chapter-07/09-test-it-with-asserts"><span class="tick"></span><span class="num">7.9</span> Test it with assert checks</a></li><li><a href="../chapters/chapter-07/10-make-the-output-friendly.html" data-id="chapter-07/10-make-the-output-friendly"><span class="tick"></span><span class="num">7.10</span> Make the output friendly</a></li><li><a href="../chapters/chapter-07/11-debugging-toolkit.html" data-id="chapter-07/11-debugging-toolkit"><span class="tick"></span><span class="num">7.11</span> Debugging toolkit</a></li><li><a href="../chapters/chapter-07/12-run-it-on-your-computer.html" data-id="chapter-07/12-run-it-on-your-computer"><span class="tick"></span><span class="num">7.12</span> Run it on your own computer</a></li><li><a href="../chapters/chapter-07/13-what-next.html" data-id="chapter-07/13-what-next"><span class="tick"></span><span class="num">7.13</span> What next</a></li><li><a href="../chapters/chapter-07/90-practice-lab.html" data-id="chapter-07/90-practice-lab"><span class="tick"></span><span class="num">7.Lab</span> 🧪 &quot;Practice lab: mixed review&quot;</a></li><li><a href="../chapters/chapter-07/91-class-project.html" data-id="chapter-07/91-class-project"><span class="tick"></span><span class="num">7.Project</span> 🏆 &quot;Final project: the Month-End Report&quot;</a></li><li><a href="../chapters/chapter-07/quiz.html" data-id="chapter-07/quiz"><span class="tick"></span><span class="num">7.Quiz</span> 📝 Class quiz</a></li></ul></details><details class="m-sec" open><summary><span>📝 Assignments</span></summary><ul><li><a href="../extras/assignments-overview.html" data-id="extras/assignments-overview"><span class="tick"></span>Assignments overview</a></li><li><a href="../extras/assignment-1.html" data-id="extras/assignment-1"><span class="tick"></span>Assignment 1. Lunch Rush Calculator</a></li><li><a href="../extras/assignment-2.html" data-id="extras/assignment-2"><span class="tick"></span>Assignment 2. Menu Toolkit</a></li><li><a href="../extras/assignment-3.html" data-id="extras/assignment-3"><span class="tick"></span>Assignment 3. Messy Orders</a></li><li><a href="../extras/group-project.html" data-id="extras/group-project"><span class="tick"></span>Group project. Campus Bites Expands</a></li><li><a href="../extras/group-scenario-1.html" data-id="extras/group-scenario-1"><span class="tick"></span>Group scenario 1. Food truck</a></li><li><a href="../extras/group-scenario-2.html" data-id="extras/group-scenario-2"><span class="tick"></span>Group scenario 2. Catering arm</a></li><li><a href="../extras/group-scenario-3.html" data-id="extras/group-scenario-3"><span class="tick"></span>Group scenario 3. Campus kiosk</a></li><li><a href="../extras/group-scenario-4.html" data-id="extras/group-scenario-4"><span class="tick"></span>Group scenario 4. Loyalty program</a></li><li><a href="../extras/group-scenario-5.html" data-id="extras/group-scenario-5"><span class="tick"></span>Group scenario 5. Delivery service</a></li><li><a href="../extras/group-scenario-6.html" data-id="extras/group-scenario-6"><span class="tick"></span>Group scenario 6. Seasonal pop-up</a></li><li><a href="../extras/group-scenario-7.html" data-id="extras/group-scenario-7"><span class="tick"></span>Group scenario 7. Vending route</a></li><li><a href="../extras/group-presentation.html" data-id="extras/group-presentation"><span class="tick"></span>Group project. Presentation guide</a></li><li><a href="../extras/group-rubric.html" data-id="extras/group-rubric"><span class="tick"></span>Group project. Rubric</a></li><li><a href="../extras/group-peer-form.html" data-id="extras/group-peer-form"><span class="tick"></span>Group project. Peer contribution form</a></li></ul></details>
+<details class="m-sec"><summary><span>🛠️ Appendices</span></summary><ul><li><a href="../extras/appendix-a-vscode.html" data-id="extras/appendix-a-vscode"><span class="tick"></span>Appendix A. Run Python in VS Code</a></li><li><a href="../extras/appendix-b-github.html" data-id="extras/appendix-b-github"><span class="tick"></span>Appendix B. GitHub basics</a></li></ul></details>
+    <button class="copy-progress" type="button">📋 Copy my progress</button>
+    <button class="reset-progress" type="button">Reset my progress</button>
+  </nav>
+  <main class="content" id="main">
+    <div class="crumb">📝 Assignments</div><h1>Assignment 1. Lunch Rush Calculator</h1><p><strong>Skills:</strong> variables, <code>input()</code>, numbers, f-strings, <code>if</code> / <code>elif</code> / <code>else</code>, <code>for</code> loops. <strong>Time:</strong> about 1 hour.</p>
+<h2>The story</h2>
+<p>Noon at Campus Bites. Amina shouts, "Luis, price these lunch orders fast!" Luis would rather have Python do it.
+You will write a program that prices <strong>three customers</strong> in a row and then prints the day's total.</p>
+<h2>What your program must do</h2>
+<p>For each of the 3 customers:</p>
+<ol>
+<li>Ask how many <strong>coffees</strong> ($4.50) and how many <strong>muffins</strong> ($3.25).</li>
+<li>Ask <code>Delivery (yes/no):</code>.</li>
+<li>Work out the <strong>subtotal</strong>.</li>
+<li>Give a <strong>discount</strong>: over $40 gets 20% off, over $20 gets 10% off, otherwise 0%.</li>
+<li>Delivery costs <strong>$3.00</strong>, unless the customer said <code>no</code> (pickup, no fee) or the amount <strong>after the discount</strong> is <strong>$25 or more</strong> (free delivery).</li>
+<li>Print the receipt and add the total to the day total.</li>
+</ol>
+<p>When all three are done, print how many customers there were and the <strong>day total</strong>.</p>
+<h2>What the receipt looks like</h2>
+<p>For 5 coffees, 2 muffins and delivery <code>yes</code>:</p>
+<pre><code>Customer 1
+Coffees: 5
+Muffins: 2
+Delivery (yes/no): yes
+Subtotal: $29.00
+Discount: 10%
+After discount: $26.10
+Delivery fee: $0.00
+Total: $26.10
+</code></pre>
+<p>At the end:</p>
+<pre><code>Customers: 3
+Day total: $92.40
+</code></pre>
+<aside class="callout note"><p>The words and symbols must match exactly: <code>Subtotal: $29.00</code>, with a dollar sign and two decimals. Use f-strings, such as <code>f"{x:.2f}"</code>.</p></aside>
+<h2>Steps</h2>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#1" aria-label="Step 1 done"><div class="step-body"><p>Download the starter and save it as <code>lunch_rush.py</code> inside a new folder called <code>assignment-1</code>.</p></div></div>
+<div class="file" data-name="lunch_rush.py"><div class="file-head"><span>📄 lunch_rush.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><pre><code># Assignment 1: Lunch Rush Calculator
+# File name: lunch_rush.py   (save this starter under that name)
+#
+# Prices
+coffee_price = 4.50
+muffin_price = 3.25
+
+day_total = 0.0
+
+for customer in range(1, 4):          # three customers
+    print(f&quot;Customer {customer}&quot;)
+
+    # TODO 1: ask how many coffees and muffins (use input and int)
+
+    # TODO 2: ask &quot;Delivery (yes/no): &quot;
+
+    # TODO 3: work out the subtotal and print it, e.g.  Subtotal: $29.00
+
+    # TODO 4: discount rate, print e.g.  Discount: 10%
+    #   over 40 -&gt; 20%,  over 20 -&gt; 10%,  otherwise 0%
+
+    # TODO 5: print the amount after the discount, e.g.  After discount: $26.10
+
+    # TODO 6: delivery fee, print e.g.  Delivery fee: $3.00
+    #   delivery &quot;no&quot; -&gt; 0, delivery &quot;yes&quot; and after-discount amount 25 or more -&gt; 0, otherwise 3
+
+    # TODO 7: print the final total, e.g.  Total: $29.10, and add it to day_total
+
+    print()
+
+# TODO 8: print the day&#x27;s results, e.g.
+#   Customers: 3
+#   Day total: $92.40
+</code></pre></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#2" aria-label="Step 2 done"><div class="step-body"><p>Do the <code>TODO</code> notes in order. Run your file after each one.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#3" aria-label="Step 3 done"><div class="step-body"><p>Download the self-check, save it in the <strong>same folder</strong>, and run it.</p></div></div>
+<div class="file" data-name="a1_selfcheck.py"><div class="file-head"><span>📄 a1_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 1. Put this file next to lunch_rush.py and run it.&quot;&quot;&quot;
+import subprocess
+import sys
+
+# Three customers: coffees, muffins, delivery
+ANSWERS = &quot;5\n2\nyes\n1\n0\nyes\n12\n6\nyes\n&quot;
+CHECKS = [
+    (&quot;Customer 1 subtotal&quot;, &quot;Subtotal: $29.00&quot;),
+    (&quot;Customer 1 discount&quot;, &quot;Discount: 10%&quot;),
+    (&quot;Customer 1 after discount&quot;, &quot;After discount: $26.10&quot;),
+    (&quot;Customer 1 free delivery&quot;, &quot;Delivery fee: $0.00&quot;),
+    (&quot;Customer 1 total&quot;, &quot;Total: $26.10&quot;),
+    (&quot;Customer 2 subtotal&quot;, &quot;Subtotal: $4.50&quot;),
+    (&quot;Customer 2 no discount&quot;, &quot;Discount: 0%&quot;),
+    (&quot;Customer 2 delivery fee&quot;, &quot;Delivery fee: $3.00&quot;),
+    (&quot;Customer 2 total&quot;, &quot;Total: $7.50&quot;),
+    (&quot;Customer 3 subtotal&quot;, &quot;Subtotal: $73.50&quot;),
+    (&quot;Customer 3 big discount&quot;, &quot;Discount: 20%&quot;),
+    (&quot;Customer 3 total&quot;, &quot;Total: $58.80&quot;),
+    (&quot;Customer count&quot;, &quot;Customers: 3&quot;),
+    (&quot;Day total&quot;, &quot;Day total: $92.40&quot;),
+]
+
+
+def main():
+    try:
+        run = subprocess.run([sys.executable, &quot;lunch_rush.py&quot;], input=ANSWERS, capture_output=True,
+                             text=True, timeout=20)
+    except FileNotFoundError:
+        sys.exit(&quot;Could not run Python.&quot;)
+    except subprocess.TimeoutExpired:
+        sys.exit(&quot;Your program did not finish. Check for a loop that never ends.&quot;)
+    if run.returncode != 0:
+        print(&quot;Your program stopped with an error:\n&quot;)
+        print(run.stderr.strip()[-600:] or &quot;(no message)&quot;)
+        sys.exit(1)
+    passed = 0
+    for label, expected in CHECKS:
+        ok = expected in run.stdout
+        passed += ok
+        print((&quot;PASS  &quot; if ok else &quot;FAIL  &quot;) + label + (&quot;&quot; if ok else f&#x27;   (looking for: {expected})&#x27;))
+    print(f&quot;\n{passed} of {len(CHECKS)} checks passed.&quot;)
+    if passed &lt; len(CHECKS):
+        print(&quot;Tip: copy the text exactly, including spaces, $ signs and two decimals.&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre></details></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#4" aria-label="Step 4 done"><div class="step-body"><p>Run the self-check until it says <code>14 of 14 checks passed</code>.</p></div></div>
+<details class="fix"><summary>If it did not work</summary><ul>
+<li><strong><code>FAIL</code> but your numbers look right</strong>: compare the text letter by letter. Look for a missing <code>$</code>, a missing space, or <code>26.1</code> instead of <code>26.10</code>.</li>
+<li><strong>"Your program stopped with an error"</strong>: read the last line of the message. It names the line number and the problem (see Class 1, Reading errors).</li>
+<li><strong><code>ValueError</code> on <code>int(...)</code></strong>: the self-check types whole numbers. Make sure you convert with <code>int(input(...))</code> and you did not add extra text to the prompt answers.</li>
+<li><strong>The self-check cannot find <code>lunch_rush.py</code></strong>: it must be in the same folder and have exactly that name.</li>
+</ul></details>
+<section class="evidence"><h3>📤 Hand this in</h3><p>Put <code>lunch_rush.py</code> in a folder called <code>assignment-1</code> in your GitHub repo (use the website upload from Appendix B). Hand in your <strong>repo link</strong>.</p></section>
+<h2>Rubric (20 points)</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Points</th>
+<th>What earns them</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Correct results</td>
+<td>10</td>
+<td>Self-check: all 14 checks pass (about 0.7 point each)</td>
+</tr>
+<tr>
+<td>Uses the skills</td>
+<td>4</td>
+<td><code>input</code> with <code>int</code>, <code>if/elif/else</code> for the discount, a <code>for</code> loop, f-strings with money</td>
+</tr>
+<tr>
+<td>Clear code</td>
+<td>3</td>
+<td>Good variable names, a few helpful comments, no copy-pasted blocks</td>
+</tr>
+<tr>
+<td>Hand-in</td>
+<td>3</td>
+<td>Right file name, right folder, repo link works</td>
+</tr>
+</tbody>
+</table>
+<h2>Stretch (optional, no marks)</h2>
+<ul>
+<li>Reject a negative number of coffees and ask again.</li>
+<li>Print a small thank-you line that changes with the total, such as <code>Big spender!</code> over $50.</li>
+</ul>
+    
+  </main>
+</div>
+<div class="modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-emoji"></div><h2 class="modal-title" id="modal-title"></h2><p class="modal-text"></p><button class="btn big modal-close" type="button">Keep going</button></div></div>
+<div class="modal progress-modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title"><h2 id="pm-title">Copy my progress</h2><p>Type your name, then copy this and paste it in the class chat.</p><label>Your name <input type="text" class="pm-name" autocomplete="name"></label><textarea class="pm-text" readonly rows="9" aria-label="Your progress"></textarea><div class="pm-actions"><button class="btn big pm-copy" type="button">Copy</button> <button class="btn pm-close" type="button">Close</button></div><p class="pm-msg" role="status"></p></div></div>
+<canvas class="confetti" aria-hidden="true"></canvas>
+<script src="../assets/data.js"></script>
+<script src="../assets/runner.js"></script>
+<script src="../assets/widgets.js"></script>
+<script src="../assets/app.js"></script>
+
+</body>
+</html>
