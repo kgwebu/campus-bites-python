@@ -38,16 +38,58 @@
     <button class="reset-progress" type="button">Reset my progress</button>
   </nav>
   <main class="content" id="main">
-    <div class="crumb">📝 Assignments</div><h1>Assignment 2. Menu Toolkit</h1><p><strong>Skills:</strong> dictionaries, functions, parameters, default values, <code>return</code>, <code>lambda</code> with <code>max</code>, <code>assert</code>, modules. <strong>Time:</strong> about 1.5 hours.</p>
+    <div class="crumb">📝 Assignments</div><h1>Assignment 2. Menu Toolkit</h1><p><strong>Skills:</strong> dictionaries, functions, parameters, default values, keyword arguments, <code>*args</code>, <code>return</code>, <code>lambda</code> with <code>sorted</code> and <code>min</code>, <code>raise</code>, <code>assert</code>, modules. <strong>Time:</strong> about 2.5 hours.</p>
 <h2>The story</h2>
-<p>Luis is tired of copying the same price code again and again. Amina says, "Build a <strong>toolkit</strong> we can reuse." You will write
-six functions in one file (a <strong>module</strong>) and use them from a second file.</p>
+<p>Luis is tired of copying the same price code again and again. Amina says, "Build a <strong>toolkit</strong> we can reuse. Other people
+will call your functions with menus you have never seen." So your functions must work for <strong>any</strong> menu and <strong>any</strong> order,
+not only for ours.</p>
+<h2>Your numbers</h2>
+<section class="variant-card" data-aid="a2"><h3>🔢 Your numbers</h3><p>Every student gets different numbers, worked out from the GitHub username. Type yours to see them. Your program and your self-check use these.</p><label>GitHub username <input class="variant-user" type="text" autocomplete="off" spellcheck="false" placeholder="your-username"></label><div class="variant-out" aria-live="polite"></div></section>
+<p>Type your GitHub username in the card. It shows your <strong>menu</strong>, your <strong>discount numbers</strong>, and your <strong>two rules</strong>.
+A classmate's code will not pass with your numbers. The marking program uses your numbers too.</p>
 <h2>What you must build</h2>
-<p>Two files, in a folder called <code>assignment-2</code>:</p>
+<p>Two files, in a folder called <code>assignment-2</code>. <strong>Create them from scratch.</strong> There is no starter code.</p>
 <ul>
-<li><code>menu_tools.py</code> holds the menu and <strong>six functions</strong>.</li>
-<li><code>menu_main.py</code> imports those functions, checks them with <code>assert</code>, and prints a short report.</li>
+<li><code>menu_tools.py</code> holds your menu and <strong>eight functions</strong>.</li>
+<li><code>menu_main.py</code> imports the module, checks it with <code>assert</code>, and prints a report.</li>
 </ul>
+<h3>Your menu</h3>
+<p>In <code>menu_tools.py</code>, write a dictionary called <code>MENU</code>. The keys are item names. The values are prices (floats).
+Use exactly your five items:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span data-var="drink_1"></span></td>
+<td><span data-var="drink_1_price"></span></td>
+</tr>
+<tr>
+<td><span data-var="drink_2"></span></td>
+<td><span data-var="drink_2_price"></span></td>
+</tr>
+<tr>
+<td><span data-var="bake_1"></span></td>
+<td><span data-var="bake_1_price"></span></td>
+</tr>
+<tr>
+<td><span data-var="bake_2"></span></td>
+<td><span data-var="bake_2_price"></span></td>
+</tr>
+<tr>
+<td><span data-var="meal"></span></td>
+<td><span data-var="meal_price"></span></td>
+</tr>
+</tbody>
+</table>
+<p>An <strong>order</strong> is a dictionary of item name to whole-number quantity, like <code>{"Espresso": 3, "Bagel": 2}</code>.
+A <strong>menu</strong> passed to a function is a dictionary of item name to price. Your functions must use the menu they are <strong>given</strong>,
+never your own <code>MENU</code> inside the function.</p>
+<h3>The eight functions</h3>
 <table>
 <thead>
 <tr>
@@ -58,105 +100,135 @@ six functions in one file (a <strong>module</strong>) and use them from a second
 <tbody>
 <tr>
 <td><code>price_of(item, menu)</code></td>
-<td>The price of an item, or <code>None</code> if it is not on the menu</td>
+<td>The price, or <strong><code>None</code></strong> if the item is not on the menu</td>
+</tr>
+<tr>
+<td><code>require_price(item, menu)</code></td>
+<td>The price. If the item is not on the menu: <code>raise ValueError(f"Unknown item: {item}")</code></td>
 </tr>
 <tr>
 <td><code>order_total(order, menu)</code></td>
-<td>Total price of an order like <code>{"Coffee": 30, "Muffin": 18}</code>, rounded to 2 decimals</td>
+<td>Sum of price times quantity, <strong>rounded to 2 decimals</strong>. Empty order gives <code>0</code>. Unknown item: same <code>ValueError</code> as above. A quantity that is not a whole number of 1 or more: <code>ValueError(f"Bad quantity for {item}: {qty}")</code></td>
 </tr>
 <tr>
-<td><code>apply_discount(total, pct=0)</code></td>
-<td>Takes <code>pct</code> percent off. <strong>The default is 0.</strong> Rounded to 2 decimals</td>
+<td><code>discount_percent(order, member=False, *, bulk_at=..., bulk_pct=..., member_pct=...)</code></td>
+<td>The discount percent for the order. See the rules below. The three keyword-only values have <strong>your</strong> numbers as defaults</td>
 </tr>
 <tr>
-<td><code>most_expensive(menu)</code></td>
-<td>The name of the most expensive item</td>
+<td><code>apply_discount(total, pct=0, rounding=...)</code></td>
+<td>Takes <code>pct</code> percent off <code>total</code>, then rounds by <code>rounding</code>. <code>pct</code> defaults to 0. <code>rounding</code> defaults to <strong>your</strong> rounding rule. A <code>pct</code> below 0 or above 100: <code>ValueError(f"Bad percent: {pct}")</code>. An unknown rounding word: <code>ValueError(f"Unknown rounding: {rounding}")</code></td>
 </tr>
 <tr>
-<td><code>items_under(menu, limit)</code></td>
-<td>A <strong>sorted list</strong> of names whose price is <code>limit</code> or less</td>
+<td><code>rank_items(menu, descending=False, limit=None)</code></td>
+<td>A <strong>new list</strong> of item names sorted by price. <strong>Ties go A to Z, in both directions.</strong> If <code>limit</code> is given, only the first <code>limit</code> names</td>
 </tr>
 <tr>
-<td><code>profit_report(order, menu)</code></td>
-<td>A dictionary with <code>revenue</code>, <code>cost</code>, <code>profit</code>, each rounded to 2 decimals</td>
+<td><code>merge_orders(a, b)</code></td>
+<td>A <strong>new</strong> dictionary with the quantities of <code>a</code> and <code>b</code> added. It must <strong>not change</strong> <code>a</code> or <code>b</code></td>
+</tr>
+<tr>
+<td><code>cheapest_of(menu, *names)</code></td>
+<td>The cheapest of the names you pass (any number of them). Ties go A to Z. No names: <code>ValueError("Give at least one item")</code>. A name not on the menu: the <code>Unknown item</code> error</td>
 </tr>
 </tbody>
 </table>
-<p>Examples:</p>
-<pre><code class="language-python">order_total({&quot;Coffee&quot;: 30, &quot;Muffin&quot;: 18}, MENU)   # 193.5
-apply_discount(100, 10)                           # 90.0
-items_under(MENU, 3.25)                           # ['Muffin', 'Tea']
+<h3>Your discount rule</h3>
+<p>Count the <strong>units</strong> in an order: the sum of all its quantities.</p>
+<ul>
+<li><strong>Bulk part:</strong> if units are <strong>at least</strong> <code>bulk_at</code>, the bulk part is <code>bulk_pct</code>. Otherwise it is 0.</li>
+<li><strong>Member part:</strong> if <code>member</code> is true, the member part is <code>member_pct</code>. Otherwise it is 0.</li>
+<li><strong>Your numbers:</strong> <code>bulk_at</code> is <span data-var="bulk_at"></span>, <code>bulk_pct</code> is <span data-var="bulk_pct"></span>, <code>member_pct</code> is <span data-var="member_pct"></span>.</li>
+<li><strong>Your rule:</strong> <span data-var="discount_rule"></span>.
+  <code>add</code> means the two parts are <strong>added</strong>. <code>larger</code> means you use only the <strong>larger</strong> of the two parts.</li>
+</ul>
+<h3>Your rounding rule</h3>
+<p><code>apply_discount</code> works out <code>total * (100 - pct) / 100</code>, then rounds by the <code>rounding</code> word:</p>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Meaning</th>
+<th>Example: 12.346</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"nearest"</code></td>
+<td>to the nearest cent</td>
+<td>12.35</td>
+</tr>
+<tr>
+<td><code>"down"</code></td>
+<td>down to a whole cent</td>
+<td>12.34</td>
+</tr>
+<tr>
+<td><code>"up5"</code></td>
+<td><strong>up</strong> to the next multiple of 0.05</td>
+<td>12.35</td>
+</tr>
+</tbody>
+</table>
+<p>Your default word is <span data-var="rounding_rule"></span>. The function must still handle <strong>all three</strong> words when asked.</p>
+<aside class="callout note"><p>Functions <strong>return</strong> their answer. They never <code>print</code> and never <code>input</code>. Printing belongs in <code>menu_main.py</code>.
+Hint for <code>"down"</code> and <code>"up5"</code>: put <code>import math</code> at the top and look up <code>math.floor</code> and <code>math.ceil</code>.</p></aside>
+<h3>The <code>__main__</code> guard</h3>
+<p>At the bottom of <code>menu_tools.py</code>, add a block that starts <code>if __name__ == "__main__":</code>. Put two or three <code>assert</code> lines in it.
+Nothing may print when another file <strong>imports</strong> <code>menu_tools</code>. Every function needs a <strong>docstring</strong>.</p>
+<h3>The report</h3>
+<p><code>menu_main.py</code> imports from <code>menu_tools</code> and has <strong>at least 3 <code>assert</code> lines</strong>. It builds two orders from your own item names:</p>
+<ul>
+<li><strong>Order A:</strong> 3 × <span data-var="drink_1"></span>, 2 × <span data-var="bake_1"></span>. Not a member.</li>
+<li><strong>Order B:</strong> 5 × <span data-var="drink_2"></span>, 3 × <span data-var="bake_2"></span>, 4 × <span data-var="meal"></span>. A member.</li>
+</ul>
+<p>It prints <strong>exactly these 13 lines</strong>. Money has 2 decimals. Percents use <code>{pct:g}</code> so <code>10</code> prints as <code>10</code>.</p>
+<pre><code>Menu Toolkit report
+Cheapest item: &lt;name from cheapest_of over all MENU items&gt;
+Priciest item: &lt;first name of rank_items(MENU, descending=True)&gt;
+Price of Pizza: &lt;what price_of returns for Pizza&gt;
+Order A total: &lt;order_total of A&gt;
+Order A discount: &lt;discount_percent of A&gt;%
+Order A pays: &lt;apply_discount of A total and its percent, default rounding&gt;
+Order B total: &lt;order_total of B&gt;
+Order B discount: &lt;discount_percent of B, member&gt;%
+Order B pays: &lt;apply_discount of B total and its percent, default rounding&gt;
+Both orders together: &lt;order_total of merge_orders(A, B), no discount&gt;
+Ranking: &lt;all names, priciest first, joined with &quot;, &quot;&gt;
+Error check: &lt;the message of the ValueError from require_price(&quot;Pizza&quot;, MENU)&gt;
 </code></pre>
-<aside class="callout note"><p>Functions should <strong>return</strong> their answer. They should not print it. Printing belongs in <code>menu_main.py</code>.</p></aside>
+<p>The last line must come from a real <code>try</code> / <code>except ValueError as err</code>. The marking program runs your <code>menu_main.py</code> with <strong>other menu prices</strong>.
+If you typed the numbers into <code>print</code>, it fails.</p>
 <h2>Steps</h2>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-2#1" aria-label="Step 1 done"><div class="step-body"><p>Download the starter for <code>menu_tools.py</code>. Save it with that exact name in a new <code>assignment-2</code> folder.</p></div></div>
-<div class="file" data-name="menu_tools.py"><div class="file-head"><span>📄 menu_tools.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><pre><code># Assignment 2: Menu Toolkit
-# File name: menu_tools.py   (save this starter under that name)
+<div class="step"><input type="checkbox" data-tick="extras/assignment-2#1" aria-label="Step 1 done"><div class="step-body"><p>Make a folder <code>assignment-2</code>. Open that <strong>folder</strong> in VS Code. Create <code>menu_tools.py</code> and <code>menu_main.py</code> <strong>from scratch</strong>.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-2#2" aria-label="Step 2 done"><div class="step-body"><p>Download <code>variants.py</code> into the same folder. The self-check needs it.</p></div></div>
+<p><a class="btn" href="../downloads/variants.py" download>⬇ Download variants.py</a></p>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-2#3" aria-label="Step 3 done"><div class="step-body"><p>Write <code>MENU</code> and the functions <strong>one at a time</strong>. Test each in <code>menu_tools.py</code> under the guard before you go on.
+Use <code>sorted(..., key=lambda ...)</code> for the ranking. For a tie rule, make the key a pair like <code>(price, name)</code>.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-2#4" aria-label="Step 4 done"><div class="step-body"><p>Write <code>menu_main.py</code> and print the report. Add the <code>assert</code> lines.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-2#5" aria-label="Step 5 done"><div class="step-body"><p>Download the self-check into the same folder and run it. Type your GitHub username when it asks. Fix every <code>FAIL</code>.</p></div></div>
+<div class="file" data-name="a2_selfcheck.py"><div class="file-head"><span>📄 a2_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 2. Put this file, variants.py, menu_tools.py and menu_main.py in one folder, then run it.
 
-MENU = {
-    &quot;Coffee&quot;: {&quot;price&quot;: 4.50, &quot;cost&quot;: 1.50},
-    &quot;Muffin&quot;: {&quot;price&quot;: 3.25, &quot;cost&quot;: 1.10},
-    &quot;Tea&quot;: {&quot;price&quot;: 3.00, &quot;cost&quot;: 0.60},
-    &quot;Sandwich&quot;: {&quot;price&quot;: 6.50, &quot;cost&quot;: 2.80},
-}
-
-
-def price_of(item, menu):
-    &quot;&quot;&quot;Return the price of item, or None if the item is not on the menu.&quot;&quot;&quot;
-    pass
-
-
-def order_total(order, menu):
-    &quot;&quot;&quot;order is a dictionary like {&quot;Coffee&quot;: 30, &quot;Muffin&quot;: 18}.
-    Return the total price, rounded to 2 decimals.&quot;&quot;&quot;
-    pass
-
-
-def apply_discount(total, pct=0):
-    &quot;&quot;&quot;Take pct percent off total. The default is no discount. Round to 2 decimals.&quot;&quot;&quot;
-    pass
-
-
-def most_expensive(menu):
-    &quot;&quot;&quot;Return the name of the item with the highest price.&quot;&quot;&quot;
-    pass
-
-
-def items_under(menu, limit):
-    &quot;&quot;&quot;Return a sorted list of item names whose price is limit or less.&quot;&quot;&quot;
-    pass
-
-
-def profit_report(order, menu):
-    &quot;&quot;&quot;Return a dictionary: {&quot;revenue&quot;: ..., &quot;cost&quot;: ..., &quot;profit&quot;: ...}, each rounded to 2 decimals.
-    Profit = revenue - cost. (Ignore any event fees.)&quot;&quot;&quot;
-    pass
-</code></pre></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-2#2" aria-label="Step 2 done"><div class="step-body"><p>Download the starter for <code>menu_main.py</code> into the same folder.</p></div></div>
-<div class="file" data-name="menu_main.py"><div class="file-head"><span>📄 menu_main.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><pre><code># Assignment 2: Menu Toolkit
-# File name: menu_main.py   (save this starter under that name)
-from menu_tools import MENU, price_of, order_total, apply_discount, most_expensive, items_under, profit_report
-
-first_event = {&quot;Coffee&quot;: 30, &quot;Muffin&quot;: 18}
-
-# TODO 1: add at least two assert lines that check your functions.
-#   Example:  assert price_of(&quot;Tea&quot;, MENU) == 3.0
-
-# TODO 2: print a short report for the first event, using ALL six functions:
-#   - the total for first_event
-#   - the total with a 10 percent discount
-#   - the profit report
-#   - the most expensive item
-#   - the items that cost 4.00 or less
-</code></pre></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-2#3" aria-label="Step 3 done"><div class="step-body"><p>Replace each <code>pass</code> with real code. Test each function in <code>menu_main.py</code> as you write it.</p></div></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-2#4" aria-label="Step 4 done"><div class="step-body"><p>Add <strong>at least two</strong> <code>assert</code> lines, then print the report asked for in the starter.</p></div></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-2#5" aria-label="Step 5 done"><div class="step-body"><p>Download the self-check into the same folder, run it, and fix every <code>FAIL</code>.</p></div></div>
-<div class="file" data-name="a2_selfcheck.py"><div class="file-head"><span>📄 a2_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 2. Put this file in the same folder as menu_tools.py and menu_main.py, then run it.&quot;&quot;&quot;
+It checks YOUR numbers (they come from your GitHub username). The real marking uses more checks and other menus.
+&quot;&quot;&quot;
 import ast
+import importlib
 import subprocess
 import sys
 
+USERNAME = &quot;&quot;  # optional: type your GitHub username here to skip the question
+
+try:
+    from variants import pick
+except ImportError:
+    sys.exit(&quot;Could not find variants.py. Download it and save it in this folder.&quot;)
+
+name = USERNAME or input(&quot;GitHub username: &quot;)
+v = pick(&quot;a2&quot;, name)
+my_menu = {v[&quot;drink_1&quot;]: float(v[&quot;drink_1_price&quot;]), v[&quot;drink_2&quot;]: float(v[&quot;drink_2_price&quot;]),
+           v[&quot;bake_1&quot;]: float(v[&quot;bake_1_price&quot;]), v[&quot;bake_2&quot;]: float(v[&quot;bake_2_price&quot;]),
+           v[&quot;meal&quot;]: float(v[&quot;meal_price&quot;])}
+NAMES = [&quot;price_of&quot;, &quot;require_price&quot;, &quot;order_total&quot;, &quot;discount_percent&quot;, &quot;apply_discount&quot;,
+         &quot;rank_items&quot;, &quot;merge_orders&quot;, &quot;cheapest_of&quot;]
 results = []
 
 
@@ -170,58 +242,92 @@ def check(label, test):
     print((&quot;PASS  &quot; if ok else &quot;FAIL  &quot;) + label)
 
 
+def raises(message, fn, *args, **kwargs):
+    try:
+        fn(*args, **kwargs)
+    except ValueError as e:
+        return str(e) == message
+    return False
+
+
 try:
-    import menu_tools as m
+    m = importlib.import_module(&quot;menu_tools&quot;)
 except Exception as e:
     sys.exit(f&quot;Could not load menu_tools.py: {type(e).__name__}: {e}&quot;)
 
-menu = m.MENU
-first = {&quot;Coffee&quot;: 30, &quot;Muffin&quot;: 18}
-check(&quot;price_of(&#x27;Tea&#x27;) is 3.0&quot;, lambda: m.price_of(&quot;Tea&quot;, menu) == 3.0)
-check(&quot;price_of(&#x27;Cookie&#x27;) is None&quot;, lambda: m.price_of(&quot;Cookie&quot;, menu) is None)
-check(&quot;order_total for the first event is 193.5&quot;, lambda: m.order_total(first, menu) == 193.5)
-check(&quot;order_total of an empty order is 0&quot;, lambda: m.order_total({}, menu) == 0)
-check(&quot;apply_discount(100) is 100&quot;, lambda: m.apply_discount(100) == 100)
-check(&quot;apply_discount(100, 10) is 90&quot;, lambda: m.apply_discount(100, 10) == 90)
-check(&quot;apply_discount(50, pct=20) is 40&quot;, lambda: m.apply_discount(50, pct=20) == 40)
-check(&quot;most_expensive is Sandwich&quot;, lambda: m.most_expensive(menu) == &quot;Sandwich&quot;)
-check(&quot;items_under(3.25) is [&#x27;Muffin&#x27;, &#x27;Tea&#x27;]&quot;, lambda: m.items_under(menu, 3.25) == [&quot;Muffin&quot;, &quot;Tea&quot;])
-check(&quot;items_under(1) is an empty list&quot;, lambda: m.items_under(menu, 1) == [])
-check(&quot;profit_report revenue is 193.5&quot;, lambda: m.profit_report(first, menu)[&quot;revenue&quot;] == 193.5)
-check(&quot;profit_report cost is 64.8&quot;, lambda: m.profit_report(first, menu)[&quot;cost&quot;] == 64.8)
-check(&quot;profit_report profit is 128.7&quot;, lambda: m.profit_report(first, menu)[&quot;profit&quot;] == 128.7)
-check(&quot;menu_tools does not change MENU&quot;, lambda: menu[&quot;Tea&quot;][&quot;price&quot;] == 3.0 and len(menu) == 4)
+tiny = {&quot;Tea&quot;: 2.0, &quot;Roll&quot;: 1.5, &quot;Cake&quot;: 2.0}
+check(&quot;MENU has your 5 items and your prices&quot;, lambda: {k: float(x) for k, x in m.MENU.items()} == my_menu)
+check(&quot;all 8 functions exist and each has a docstring&quot;,
+      lambda: all(callable(getattr(m, n, None)) and (getattr(m, n).__doc__ or &quot;&quot;).strip() for n in NAMES))
+check(&quot;price_of gives None, and require_price raises ValueError(&#x27;Unknown item: Pizza&#x27;)&quot;,
+      lambda: m.price_of(&quot;Pizza&quot;, tiny) is None and m.price_of(&quot;Tea&quot;, tiny) == 2.0
+      and raises(&quot;Unknown item: Pizza&quot;, m.require_price, &quot;Pizza&quot;, tiny))
+check(&quot;order_total adds price x quantity&quot;, lambda: m.order_total({&quot;Tea&quot;: 2, &quot;Roll&quot;: 3}, tiny) == 8.5)
+check(&quot;discount_percent uses bulk_at, bulk_pct and member_pct&quot;,
+      lambda: m.discount_percent({&quot;Tea&quot;: 3}, bulk_at=3, bulk_pct=10, member_pct=2) == 10
+      and m.discount_percent({&quot;Tea&quot;: 2}, bulk_at=3, bulk_pct=10, member_pct=2) == 0
+      and m.discount_percent({&quot;Tea&quot;: 2}, True, bulk_at=3, bulk_pct=10, member_pct=2) == 2)
+check(&quot;discount_percent defaults are the numbers on your card&quot;,
+      lambda: m.discount_percent({&quot;Tea&quot;: int(v[&quot;bulk_at&quot;])}, True)
+      == m.discount_percent({&quot;Tea&quot;: int(v[&quot;bulk_at&quot;])}, True, bulk_at=int(v[&quot;bulk_at&quot;]), bulk_pct=int(v[&quot;bulk_pct&quot;]),
+                            member_pct=int(v[&quot;member_pct&quot;])))
+check(&quot;apply_discount: (80, 25, &#x27;nearest&#x27;) is 60.0, pct defaults to 0, rounding defaults to your rule&quot;,
+      lambda: m.apply_discount(80, 25, &quot;nearest&quot;) == 60.0 and m.apply_discount(80) == 80
+      and m.apply_discount(19.99, 15) == m.apply_discount(19.99, 15, v[&quot;rounding_rule&quot;]))
+check(&quot;rank_items: ties are A to Z, also when descending&quot;,
+      lambda: m.rank_items(tiny) == [&quot;Roll&quot;, &quot;Cake&quot;, &quot;Tea&quot;] and m.rank_items(tiny, descending=True) == [&quot;Cake&quot;, &quot;Tea&quot;, &quot;Roll&quot;]
+      and m.rank_items(tiny, limit=1) == [&quot;Roll&quot;])
+a, b = {&quot;Tea&quot;: 1}, {&quot;Tea&quot;: 2, &quot;Roll&quot;: 1}
+check(&quot;merge_orders adds quantities and does not change its inputs&quot;,
+      lambda: m.merge_orders(a, b) == {&quot;Tea&quot;: 3, &quot;Roll&quot;: 1} and a == {&quot;Tea&quot;: 1} and b == {&quot;Tea&quot;: 2, &quot;Roll&quot;: 1})
+check(&quot;cheapest_of takes any number of names (ties A to Z)&quot;,
+      lambda: m.cheapest_of(tiny, &quot;Tea&quot;, &quot;Cake&quot;) == &quot;Cake&quot; and m.cheapest_of(tiny, &quot;Tea&quot;) == &quot;Tea&quot;
+      and raises(&quot;Give at least one item&quot;, m.cheapest_of, tiny))
 
 
 def main_checks():
     try:
         src = open(&quot;menu_main.py&quot;, encoding=&quot;utf-8&quot;).read()
-    except OSError:
-        print(&quot;FAIL  menu_main.py was not found&quot;)
-        results.append(False)
+        tree = ast.parse(src)
+    except (OSError, SyntaxError) as e:
+        check(f&quot;menu_main.py can be read ({type(e).__name__})&quot;, lambda: False)
         return
-    tree = ast.parse(src)
-    asserts = sum(isinstance(n, ast.Assert) for n in ast.walk(tree))
-    check(&quot;menu_main.py has at least 2 assert lines&quot;, lambda: asserts &gt;= 2)
-    check(&quot;menu_main.py imports from menu_tools&quot;, lambda: &quot;menu_tools&quot; in src)
-    run = subprocess.run([sys.executable, &quot;menu_main.py&quot;], capture_output=True, text=True, timeout=30)
-    check(&quot;menu_main.py runs without an error&quot;, lambda: run.returncode == 0)
-    check(&quot;menu_main.py prints the 193.5 total&quot;, lambda: &quot;193.5&quot; in run.stdout)
-    check(&quot;menu_main.py prints the 128.7 profit&quot;, lambda: &quot;128.7&quot; in run.stdout)
-    check(&quot;menu_main.py prints Sandwich&quot;, lambda: &quot;Sandwich&quot; in run.stdout)
+    check(&quot;menu_main.py imports menu_tools and has 3 or more assert lines&quot;,
+          lambda: &quot;menu_tools&quot; in src and sum(isinstance(n, ast.Assert) for n in ast.walk(tree)) &gt;= 3)
+    try:
+        run = subprocess.run([sys.executable, &quot;menu_main.py&quot;], capture_output=True, text=True, timeout=20)
+    except subprocess.TimeoutExpired:
+        check(&quot;menu_main.py finishes&quot;, lambda: False)
+        return
+    lines = run.stdout.splitlines()
+    check(&quot;menu_main.py runs and prints the 13 report lines (first &#x27;Menu Toolkit report&#x27;, last &#x27;Error check: ...&#x27;)&quot;,
+          lambda: run.returncode == 0 and len(lines) == 13 and lines[0] == &quot;Menu Toolkit report&quot;
+          and lines[3] == &quot;Price of Pizza: None&quot; and lines[-1] == &quot;Error check: Unknown item: Pizza&quot;)
 
 
 main_checks()
 print(f&quot;\n{sum(results)} of {len(results)} checks passed.&quot;)
 </code></pre></details></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-2#6" aria-label="Step 6 done"><div class="step-body"><p>Add <code>NOTES.md</code> (see the integrity note below). Commit and push to your GitHub repo.</p></div></div>
 <details class="fix"><summary>If it did not work</summary><ul>
-<li><strong><code>ModuleNotFoundError: No module named 'menu_tools'</code></strong>: the two files must be in the same folder, and you must open that <strong>folder</strong> in VS Code (File, Open Folder).</li>
+<li><strong><code>ModuleNotFoundError: No module named 'menu_tools'</code></strong>: the files must be in the same folder, and you must open that <strong>folder</strong> in VS Code.</li>
+<li><strong><code>ModuleNotFoundError: No module named 'variants'</code></strong>: download <code>variants.py</code> into the same folder as the self-check.</li>
 <li><strong>A function prints <code>None</code></strong>: you forgot <code>return</code>, or you used <code>print</code> inside the function.</li>
-<li><strong><code>TypeError: unsupported operand</code></strong>: <code>price_of</code> may be returning <code>None</code> for an item. Check the spelling of the item.</li>
-<li><strong><code>items_under</code> is in the wrong order</strong>: wrap the result with <code>sorted(...)</code>.</li>
-<li><strong>A number like <code>128.70000000000002</code></strong>: use <code>round(value, 2)</code>.</li>
+<li><strong>My <code>merge_orders</code> changes the first order</strong>: <code>merged = a</code> does not copy. Use <code>dict(a)</code> or <code>a.copy()</code>.</li>
+<li><strong>Descending ties are in the wrong order</strong>: <code>reverse=True</code> also reverses the names. Use a key such as <code>(-price, name)</code>.</li>
+<li><strong><code>TypeError: ... got an unexpected keyword argument</code></strong>: the parameter name must match the table exactly.</li>
+<li><strong>A number like <code>3.4499999999999997</code></strong>: use <code>round(value, 2)</code> in <code>order_total</code>.</li>
+<li><strong>The self-check says it cannot find your numbers</strong>: check the spelling of the username. Capital letters do not matter.</li>
 </ul></details>
-<section class="evidence"><h3>📤 Hand this in</h3><p>Put both files in a folder called <code>assignment-2</code> in your GitHub repo (commit and push, see Appendix B). Hand in your <strong>repo link</strong>.</p></section>
+<section class="evidence"><h3>📤 Hand this in</h3><p>Put both files and <code>NOTES.md</code> in a folder called <code>assignment-2</code> in your GitHub repo (commit and push, see Appendix B).
+Hand in your <strong>repo link</strong>.</p></section>
+<h2>Integrity: how this is marked</h2>
+<ul>
+<li>Commit <strong>at least 4 times</strong>, over <strong>at least 2 different days or sessions</strong>. Each message says what you did, like "price_of and require_price work".</li>
+<li>Add a file <code>NOTES.md</code> that lists <strong>one bug you hit</strong> and <strong>how you fixed it</strong>.</li>
+<li>You may be asked to <strong>explain any part of your code</strong> in a 2-minute live chat. An assignment you cannot explain <strong>will not get the "Correct results" marks</strong>.</li>
+<li>The marking program runs your functions on menus and orders it chooses, and it checks that your inputs are not changed.</li>
+</ul>
 <h2>Rubric (20 points)</h2>
 <table>
 <thead>
@@ -235,29 +341,29 @@ print(f&quot;\n{sum(results)} of {len(results)} checks passed.&quot;)
 <tr>
 <td>Correct results</td>
 <td>10</td>
-<td>Self-check: all 20 checks pass (0.5 point each)</td>
+<td><strong>Automatic.</strong> Hidden tests on other menus: functions, defaults, your two rules, the report</td>
 </tr>
 <tr>
-<td>Uses the skills</td>
-<td>4</td>
-<td>Default value, <code>lambda</code> or <code>key=</code> with <code>max</code>, <code>assert</code> lines, import from a module</td>
+<td>Handling bad input</td>
+<td>3</td>
+<td><strong>Automatic.</strong> The checks marked <code>[bad input]</code>: the exact <code>ValueError</code> messages</td>
 </tr>
 <tr>
 <td>Clear code</td>
-<td>3</td>
-<td>Docstrings kept or improved, good names, no repeated code</td>
+<td>4</td>
+<td>Docstrings on every function, good names, no repeated code, useful <code>assert</code> lines, the <code>__main__</code> guard</td>
 </tr>
 <tr>
-<td>Hand-in</td>
+<td>Submission and evidence</td>
 <td>3</td>
-<td>Right file names, right folder, committed with a clear message</td>
+<td>Right file names and folder, 4 or more commits over 2 or more days, clear messages, <code>NOTES.md</code></td>
 </tr>
 </tbody>
 </table>
 <h2>Stretch (optional, no marks)</h2>
 <ul>
-<li>Add a function <code>cheapest(menu)</code>.</li>
-<li>Make <code>order_total</code> skip items that are not on the menu instead of crashing.</li>
+<li>Add <code>profit_report(order, menu, costs)</code> that returns revenue, cost and profit.</li>
+<li>Make <code>order_total</code> accept a list of <code>(item, qty)</code> tuples as well as a dictionary.</li>
 </ul>
     
   </main>
@@ -266,6 +372,7 @@ print(f&quot;\n{sum(results)} of {len(results)} checks passed.&quot;)
 <div class="modal progress-modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title"><h2 id="pm-title">Copy my progress</h2><p>Type your name, then copy this and paste it in the class chat.</p><label>Your name <input type="text" class="pm-name" autocomplete="name"></label><textarea class="pm-text" readonly rows="9" aria-label="Your progress"></textarea><div class="pm-actions"><button class="btn big pm-copy" type="button">Copy</button> <button class="btn pm-close" type="button">Close</button></div><p class="pm-msg" role="status"></p></div></div>
 <canvas class="confetti" aria-hidden="true"></canvas>
 <script src="../assets/data.js"></script>
+<script src="../assets/variants.js"></script>
 <script src="../assets/runner.js"></script>
 <script src="../assets/widgets.js"></script>
 <script src="../assets/app.js"></script>

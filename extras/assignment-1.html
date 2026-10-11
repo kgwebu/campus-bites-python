@@ -38,133 +38,239 @@
     <button class="reset-progress" type="button">Reset my progress</button>
   </nav>
   <main class="content" id="main">
-    <div class="crumb">📝 Assignments</div><h1>Assignment 1. Lunch Rush Calculator</h1><p><strong>Skills:</strong> variables, <code>input()</code>, numbers, f-strings, <code>if</code> / <code>elif</code> / <code>else</code>, <code>for</code> loops. <strong>Time:</strong> about 1 hour.</p>
+    <div class="crumb">📝 Assignments</div><h1>Assignment 1. Lunch Rush Calculator</h1><p><strong>Skills:</strong> variables, <code>input()</code>, numbers, f-strings, <code>if</code> / <code>elif</code> / <code>else</code>, <code>for</code> and <code>while</code> loops. <strong>Time:</strong> about 2 hours.</p>
 <h2>The story</h2>
-<p>Noon at Campus Bites. Amina shouts, "Luis, price these lunch orders fast!" Luis would rather have Python do it.
-You will write a program that prices <strong>three customers</strong> in a row and then prints the day's total.</p>
+<p>Noon at Campus Bites. Amina shouts, "Luis, price these lunch orders fast!" The queue changes every day.
+You will write a program that handles <strong>any number of customers</strong>, checks everything people type, and prints a day summary.</p>
+<p>There is <strong>no starter file</strong>. You create <code>lunch_rush.py</code> yourself.</p>
+<section class="variant-card" data-aid="a1"><h3>🔢 Your numbers</h3><p>Every student gets different numbers, worked out from the GitHub username. Type yours to see them. Your program and your self-check use these.</p><label>GitHub username <input class="variant-user" type="text" autocomplete="off" spellcheck="false" placeholder="your-username"></label><div class="variant-out" aria-live="polite"></div></section>
+<aside class="callout note"><p>Every student has different prices and rules. Type your GitHub username in the card above. The numbers below fill in for <strong>you</strong>.
+A classmate's program will not pass your checks, and yours will not pass theirs.</p></aside>
 <h2>What your program must do</h2>
-<p>For each of the 3 customers:</p>
+<p><strong>Your numbers:</strong></p>
+<ul>
+<li>A coffee costs <strong>$<span data-var="coffee_price"></span></strong>. A muffin costs <strong>$<span data-var="muffin_price"></span></strong>.</li>
+<li>Discount 1: the subtotal is <strong><span data-var="compare"></span> $<span data-var="disc1_over"></span></strong> and the discount is <strong><span data-var="disc1_rate"></span>%</strong>.</li>
+<li>Discount 2: the subtotal is <strong><span data-var="compare"></span> $<span data-var="disc2_over"></span></strong> and the discount is <strong><span data-var="disc2_rate"></span>%</strong>. Discount 2 wins when both apply.</li>
+<li>Delivery costs <strong>$<span data-var="delivery_fee"></span></strong>. It is free when the amount <strong>after the discount</strong> is <strong>$<span data-var="free_from"></span> or more</strong>. Pickup never pays a fee.</li>
+<li>Loyalty reward: every <strong><span data-var="loyalty_every"></span>th customer</strong> (customer <span data-var="loyalty_every"></span>, then twice that, and so on) gets <strong>$<span data-var="loyalty_off"></span> off the total</strong>. The total never goes below $0.00.</li>
+</ul>
+<p><strong>Steps of the program:</strong></p>
 <ol>
-<li>Ask how many <strong>coffees</strong> ($4.50) and how many <strong>muffins</strong> ($3.25).</li>
-<li>Ask <code>Delivery (yes/no):</code>.</li>
-<li>Work out the <strong>subtotal</strong>.</li>
-<li>Give a <strong>discount</strong>: over $40 gets 20% off, over $20 gets 10% off, otherwise 0%.</li>
-<li>Delivery costs <strong>$3.00</strong>, unless the customer said <code>no</code> (pickup, no fee) or the amount <strong>after the discount</strong> is <strong>$25 or more</strong> (free delivery).</li>
-<li>Print the receipt and add the total to the day total.</li>
+<li>Ask <code>How many customers today?</code>. It must be a whole number of 1 or more. Ask again until it is.</li>
+<li>For each customer, ask <code>Coffees:</code>, then <code>Muffins:</code>, then <code>Delivery (yes/no):</code>.</li>
+<li>Coffees and muffins must be whole numbers, 0 or more. Reject words, decimals like <code>2.5</code>, negatives and empty answers. Ask again.</li>
+<li>Delivery must be <code>yes</code> or <code>no</code> in <strong>any capitals</strong> (<code>YES</code>, <code>No</code>, <code>yEs</code>). Anything else: ask again.</li>
+<li>Work out the subtotal, the discount, the delivery fee and the loyalty reward. Print the receipt.</li>
+<li>After all customers, print the day summary.</li>
 </ol>
-<p>When all three are done, print how many customers there were and the <strong>day total</strong>.</p>
-<h2>What the receipt looks like</h2>
-<p>For 5 coffees, 2 muffins and delivery <code>yes</code>:</p>
-<pre><code>Customer 1
-Coffees: 5
-Muffins: 2
-Delivery (yes/no): yes
-Subtotal: $29.00
-Discount: 10%
-After discount: $26.10
-Delivery fee: $0.00
-Total: $26.10
+<p>If two customers have the same biggest receipt, the <strong>first</strong> one is the biggest.</p>
+<aside class="callout note"><p>Check text with <code>.isdigit()</code>. It is <code>True</code> only when the text is made of digits. So <code>"3".isdigit()</code> is <code>True</code>, but <code>"-3"</code>, <code>"2.5"</code>, <code>"abc"</code> and <code>""</code> are <code>False</code>. Use <code>.lower()</code> for the capitals.
+A <code>while</code> loop that asks again is how you "ask until it is valid".</p></aside>
+<h2>What the output looks like</h2>
+<p>Each customer prints this. Replace each <code>{...}</code> with the real value. Money has a <code>$</code> and two decimals.</p>
+<pre><code>Customer {number}
+Subtotal: ${subtotal}
+Discount: {percent}%
+After discount: ${after_discount}
+Delivery fee: ${fee}
+Loyalty: -${loyalty_amount}
+Total: ${total}
 </code></pre>
+<p>The <code>Loyalty</code> line is always printed. It shows <code>-$0.00</code> for customers who get no reward. If the reward is bigger than the amount, show only what was really taken off, so the total is <code>$0.00</code>.</p>
 <p>At the end:</p>
-<pre><code>Customers: 3
-Day total: $92.40
+<pre><code>Customers: {count}
+Day total: ${day_total}
+Average receipt: ${average}
+Biggest receipt: ${biggest} (customer {number})
 </code></pre>
-<aside class="callout note"><p>The words and symbols must match exactly: <code>Subtotal: $29.00</code>, with a dollar sign and two decimals. Use f-strings, such as <code>f"{x:.2f}"</code>.</p></aside>
+<aside class="callout note"><p>The words and symbols must match exactly. The prompts must be exactly <code>How many customers today?</code>, <code>Coffees:</code>, <code>Muffins:</code> and <code>Delivery (yes/no):</code>. Use f-strings such as <code>f"{x:.2f}"</code>.
+Watch the edges: a subtotal <strong>exactly</strong> on a threshold, an after-discount amount <strong>exactly</strong> on the free-delivery limit, and a total that would go below zero.</p></aside>
 <h2>Steps</h2>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-1#1" aria-label="Step 1 done"><div class="step-body"><p>Download the starter and save it as <code>lunch_rush.py</code> inside a new folder called <code>assignment-1</code>.</p></div></div>
-<div class="file" data-name="lunch_rush.py"><div class="file-head"><span>📄 lunch_rush.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><pre><code># Assignment 1: Lunch Rush Calculator
-# File name: lunch_rush.py   (save this starter under that name)
-#
-# Prices
-coffee_price = 4.50
-muffin_price = 3.25
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#1" aria-label="Step 1 done"><div class="step-body"><p>Make a folder called <code>assignment-1</code>. Inside it, create a new empty file called <code>lunch_rush.py</code>. Do not look for a starter. Write the program from the spec above.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#2" aria-label="Step 2 done"><div class="step-body"><p>Build it in small pieces. First ask for the count and loop that many times. Then one customer with no checks. Then the discounts. Then delivery and loyalty. Then the summary. Then the checks on input. Run it after each piece.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#3" aria-label="Step 3 done"><div class="step-body"><p>Download <code>variants.py</code> and save it in the <strong>same folder</strong>. It works out your numbers.</p></div></div>
+<p><a class="btn" href="../downloads/variants.py" download>⬇ Download variants.py</a></p>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#4" aria-label="Step 4 done"><div class="step-body"><p>Download the self-check, save it in the <strong>same folder</strong>, and run it. Type your GitHub username when it asks.</p></div></div>
+<div class="file" data-name="a1_selfcheck.py"><div class="file-head"><span>📄 a1_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 1 (Lunch Rush Calculator).
 
-day_total = 0.0
-
-for customer in range(1, 4):          # three customers
-    print(f&quot;Customer {customer}&quot;)
-
-    # TODO 1: ask how many coffees and muffins (use input and int)
-
-    # TODO 2: ask &quot;Delivery (yes/no): &quot;
-
-    # TODO 3: work out the subtotal and print it, e.g.  Subtotal: $29.00
-
-    # TODO 4: discount rate, print e.g.  Discount: 10%
-    #   over 40 -&gt; 20%,  over 20 -&gt; 10%,  otherwise 0%
-
-    # TODO 5: print the amount after the discount, e.g.  After discount: $26.10
-
-    # TODO 6: delivery fee, print e.g.  Delivery fee: $3.00
-    #   delivery &quot;no&quot; -&gt; 0, delivery &quot;yes&quot; and after-discount amount 25 or more -&gt; 0, otherwise 3
-
-    # TODO 7: print the final total, e.g.  Total: $29.10, and add it to day_total
-
-    print()
-
-# TODO 8: print the day&#x27;s results, e.g.
-#   Customers: 3
-#   Day total: $92.40
-</code></pre></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-1#2" aria-label="Step 2 done"><div class="step-body"><p>Do the <code>TODO</code> notes in order. Run your file after each one.</p></div></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-1#3" aria-label="Step 3 done"><div class="step-body"><p>Download the self-check, save it in the <strong>same folder</strong>, and run it.</p></div></div>
-<div class="file" data-name="a1_selfcheck.py"><div class="file-head"><span>📄 a1_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 1. Put this file next to lunch_rush.py and run it.&quot;&quot;&quot;
+Put this file, variants.py and your lunch_rush.py in the SAME folder, then run it.
+It uses YOUR personal numbers (worked out from your GitHub username).
+It tests some things. Your teacher&#x27;s hidden checks test more, including edge cases.
+&quot;&quot;&quot;
+import re
 import subprocess
 import sys
 
-# Three customers: coffees, muffins, delivery
-ANSWERS = &quot;5\n2\nyes\n1\n0\nyes\n12\n6\nyes\n&quot;
-CHECKS = [
-    (&quot;Customer 1 subtotal&quot;, &quot;Subtotal: $29.00&quot;),
-    (&quot;Customer 1 discount&quot;, &quot;Discount: 10%&quot;),
-    (&quot;Customer 1 after discount&quot;, &quot;After discount: $26.10&quot;),
-    (&quot;Customer 1 free delivery&quot;, &quot;Delivery fee: $0.00&quot;),
-    (&quot;Customer 1 total&quot;, &quot;Total: $26.10&quot;),
-    (&quot;Customer 2 subtotal&quot;, &quot;Subtotal: $4.50&quot;),
-    (&quot;Customer 2 no discount&quot;, &quot;Discount: 0%&quot;),
-    (&quot;Customer 2 delivery fee&quot;, &quot;Delivery fee: $3.00&quot;),
-    (&quot;Customer 2 total&quot;, &quot;Total: $7.50&quot;),
-    (&quot;Customer 3 subtotal&quot;, &quot;Subtotal: $73.50&quot;),
-    (&quot;Customer 3 big discount&quot;, &quot;Discount: 20%&quot;),
-    (&quot;Customer 3 total&quot;, &quot;Total: $58.80&quot;),
-    (&quot;Customer count&quot;, &quot;Customers: 3&quot;),
-    (&quot;Day total&quot;, &quot;Day total: $92.40&quot;),
-]
+from variants import pick
+
+USERNAME = &quot;&quot;  # you may type your GitHub username here so it does not ask every time
+
+# (coffees, muffins, delivery) for the main run: six customers
+MAIN = [(2, 1, &quot;yes&quot;), (6, 3, &quot;no&quot;), (5, 5, &quot;yes&quot;), (12, 6, &quot;yes&quot;), (1, 0, &quot;no&quot;), (9, 9, &quot;yes&quot;)]
+
+FIELDS = {
+    &quot;subtotal&quot;: r&quot;Subtotal: \$(\d+\.\d\d)(?!\d)&quot;,
+    &quot;rate&quot;: r&quot;Discount: (\d+)%&quot;,
+    &quot;after&quot;: r&quot;After discount: \$(\d+\.\d\d)(?!\d)&quot;,
+    &quot;fee&quot;: r&quot;Delivery fee: \$(\d+\.\d\d)(?!\d)&quot;,
+    &quot;loyalty&quot;: r&quot;Loyalty: -\$(\d+\.\d\d)(?!\d)&quot;,
+    &quot;total&quot;: r&quot;Total: \$(-?\d+\.\d\d)(?!\d)&quot;,
+}
+
+
+def run(lines):
+    &quot;&quot;&quot;Run lunch_rush.py with these typed lines. Returns (output, problem).&quot;&quot;&quot;
+    try:
+        p = subprocess.run([sys.executable, &quot;lunch_rush.py&quot;], input=&quot;\n&quot;.join(lines) + &quot;\n&quot;,
+                           capture_output=True, text=True, timeout=10)
+    except subprocess.TimeoutExpired:
+        return &quot;&quot;, &quot;it did not finish in 10 seconds (a loop that never ends?)&quot;
+    if p.returncode != 0:
+        last = (p.stderr.strip().splitlines() or [&quot;(no message)&quot;])[-1]
+        return p.stdout, &quot;it stopped with an error: &quot; + last[:100]
+    return p.stdout, &quot;&quot;
+
+
+def lines_for(count, customers):
+    out = [str(count)]
+    for c, m, d in customers:
+        out += [str(c), str(m), d]
+    return out
+
+
+def receipts(out):
+    parts = re.split(r&quot;Customer (\d+)(?!\d)&quot;, out)
+    found = {}
+    for i in range(1, len(parts) - 1, 2):
+        found.setdefault(int(parts[i]), {k: (re.search(rx, parts[i + 1]) or [None, None])[1] for k, rx in FIELDS.items()})
+    return found
+
+
+def summary(out):
+    def last(rx):
+        hits = re.findall(rx, out)
+        return hits[-1] if hits else None
+    return {&quot;n&quot;: last(r&quot;Customers: (\d+)&quot;), &quot;day&quot;: last(r&quot;Day total: \$(\d+\.\d\d)(?!\d)&quot;),
+            &quot;avg&quot;: last(r&quot;Average receipt: \$(\d+\.\d\d)(?!\d)&quot;),
+            &quot;big&quot;: last(r&quot;Biggest receipt: \$(\d+\.\d\d) \(customer (\d+)\)&quot;)}
 
 
 def main():
-    try:
-        run = subprocess.run([sys.executable, &quot;lunch_rush.py&quot;], input=ANSWERS, capture_output=True,
-                             text=True, timeout=20)
-    except FileNotFoundError:
-        sys.exit(&quot;Could not run Python.&quot;)
-    except subprocess.TimeoutExpired:
-        sys.exit(&quot;Your program did not finish. Check for a loop that never ends.&quot;)
-    if run.returncode != 0:
-        print(&quot;Your program stopped with an error:\n&quot;)
-        print(run.stderr.strip()[-600:] or &quot;(no message)&quot;)
-        sys.exit(1)
-    passed = 0
-    for label, expected in CHECKS:
-        ok = expected in run.stdout
-        passed += ok
-        print((&quot;PASS  &quot; if ok else &quot;FAIL  &quot;) + label + (&quot;&quot; if ok else f&#x27;   (looking for: {expected})&#x27;))
-    print(f&quot;\n{passed} of {len(CHECKS)} checks passed.&quot;)
-    if passed &lt; len(CHECKS):
-        print(&quot;Tip: copy the text exactly, including spaces, $ signs and two decimals.&quot;)
+    name = USERNAME.strip() or input(&quot;GitHub username: &quot;).strip()
+    v = pick(&quot;a1&quot;, name)
+    cp, mp = float(v[&quot;coffee_price&quot;]), float(v[&quot;muffin_price&quot;])
+    t1, r1, t2, r2 = float(v[&quot;disc1_over&quot;]), int(v[&quot;disc1_rate&quot;]), float(v[&quot;disc2_over&quot;]), int(v[&quot;disc2_rate&quot;])
+    at_least = v[&quot;compare&quot;] == &quot;at least&quot;
+    fee_amount, free_from = float(v[&quot;delivery_fee&quot;]), float(v[&quot;free_from&quot;])
+    k, off = int(v[&quot;loyalty_every&quot;]), float(v[&quot;loyalty_off&quot;])
+
+    def rate_for(sub):
+        def over(t):
+            return sub &gt;= t - 1e-9 if at_least else sub &gt; t + 1e-9
+        return r2 if over(t2) else r1 if over(t1) else 0
+
+    out, problem = run(lines_for(len(MAIN), MAIN))
+    got = receipts(out)
+    sm = summary(out)
+    fails = []
+
+    def check(label, ok, detail=&quot;&quot;):
+        if not ok:
+            fails.append((label, detail))
+        return ok
+
+    def each(label, test):
+        &quot;&quot;&quot;test(i, customer_input, printed) returns &#x27;&#x27; when fine, or a short complaint.&quot;&quot;&quot;
+        if problem:
+            return check(label, False, problem)
+        for i, cust in enumerate(MAIN, 1):
+            row = got.get(i)
+            if row is None or any(x is None for x in row.values()):
+                return check(label, False, f&quot;customer {i}: a receipt line is missing or not in the exact format&quot;)
+            msg = test(i, cust, {a: float(b) for a, b in row.items()})
+            if msg:
+                return check(label, False, f&quot;customer {i}: {msg}&quot;)
+        return check(label, True)
+
+    total_checks = 12
+    check(&quot;The program runs and finishes&quot;, not problem, problem)
+    check(&quot;Every receipt has all 7 lines in the right format&quot;,
+          not problem and len(got) == len(MAIN) and all(all(x is not None for x in r.values()) for r in got.values()),
+          problem or &quot;a line is missing, reworded or has the wrong number of decimals&quot;)
+    each(&quot;Subtotal uses your prices&quot;, lambda i, c, r: &quot;&quot; if abs(r[&quot;subtotal&quot;] - (c[0] * cp + c[1] * mp)) &lt; 0.005
+         else f&quot;Subtotal should be {c[0] * cp + c[1] * mp:.2f}&quot;)
+    each(&quot;Discount percent follows your two thresholds&quot;, lambda i, c, r: &quot;&quot; if int(r[&quot;rate&quot;]) == rate_for(c[0] * cp + c[1] * mp)
+         else f&quot;Discount should be {rate_for(c[0] * cp + c[1] * mp)}%&quot;)
+    each(&quot;After discount matches subtotal and percent&quot;, lambda i, c, r: &quot;&quot; if abs(r[&quot;after&quot;] - r[&quot;subtotal&quot;] * (100 - r[&quot;rate&quot;]) / 100) &lt; 0.006
+         else &quot;After discount does not match Subtotal and Discount&quot;)
+
+    def fee_test(i, c, r):
+        want = fee_amount if (c[2] == &quot;yes&quot; and r[&quot;after&quot;] &lt; free_from - 1e-9) else 0.0
+        return &quot;&quot; if abs(r[&quot;fee&quot;] - want) &lt; 0.005 else f&quot;Delivery fee should be {want:.2f}&quot;
+    each(&quot;Delivery fee: pickup is free, delivery is free from your limit&quot;, fee_test)
+
+    def loyalty_test(i, c, r):
+        before = r[&quot;after&quot;] + r[&quot;fee&quot;]
+        want = min(off, before) if i % k == 0 else 0.0
+        return &quot;&quot; if abs(r[&quot;loyalty&quot;] - want) &lt; 0.006 else f&quot;Loyalty should be -${want:.2f}&quot;
+    each(&quot;Loyalty amount only on every k-th customer&quot;, loyalty_test)
+    each(&quot;Total = after discount + fee - loyalty, never below 0&quot;,
+         lambda i, c, r: &quot;&quot; if abs(r[&quot;total&quot;] - (r[&quot;after&quot;] + r[&quot;fee&quot;] - r[&quot;loyalty&quot;])) &lt; 0.006 and r[&quot;total&quot;] &gt;= 0
+         else &quot;Total does not match the lines above it&quot;)
+
+    ok = not problem and all(x is not None for x in sm.values()) and len(got) == len(MAIN)
+    if ok:
+        totals = [float(got[i][&quot;total&quot;]) for i in range(1, len(MAIN) + 1)]
+        best = max(totals)
+        first = totals.index(best) + 1
+        ok = (sm[&quot;n&quot;] == str(len(MAIN)) and abs(float(sm[&quot;day&quot;]) - sum(totals)) &lt; 0.006
+              and abs(float(sm[&quot;avg&quot;]) - sum(totals) / len(totals)) &lt; 0.0051
+              and abs(float(sm[&quot;big&quot;][0]) - best) &lt; 0.006 and sm[&quot;big&quot;][1] == str(first))
+    check(&quot;Day summary: count, total, average, biggest receipt and who&quot;, ok,
+          problem or &quot;one of the four summary lines is missing or wrong&quot;)
+
+    two = [(3, 2, &quot;yes&quot;), (4, 1, &quot;no&quot;)]
+    out2, prob2 = run([&quot;abc&quot;, &quot;0&quot;, &quot;-3&quot;, &quot;2.5&quot;] + lines_for(2, two))
+    check(&quot;Asks again for a bad customer count&quot;, not prob2 and summary(out2)[&quot;n&quot;] == &quot;2&quot;,
+          prob2 or &quot;after bad answers it should ask again, then use 2&quot;)
+    bad = [&quot;2&quot;, &quot;-1&quot;, &quot;x&quot;, &quot;3&quot;, &quot;2.5&quot;, &quot;1&quot;, &quot;maybe&quot;, &quot;y&quot;, &quot;yes&quot;, &quot;0&quot;, &quot;0&quot;, &quot;no&quot;]
+    out3, prob3 = run(bad)
+    r3 = receipts(out3)
+    ok3 = (not prob3 and len(r3) == 2 and r3.get(1, {}).get(&quot;subtotal&quot;) == f&quot;{3 * cp + 1 * mp:.2f}&quot;
+           and r3.get(2, {}).get(&quot;subtotal&quot;) == &quot;0.00&quot;)
+    check(&quot;Asks again for bad coffees, muffins and delivery answers&quot;, ok3,
+          prob3 or &quot;bad answers should be rejected and asked again, not used&quot;)
+
+    passed = total_checks - len(fails)
+    for label, detail in fails:
+        print(f&quot;FAIL  {label}   ({detail})&quot;)
+    print(f&quot;\n{passed} of {total_checks} checks passed.&quot;)
+    if fails:
+        print(&quot;Tip: the hidden checks also test exact threshold amounts and strange input.&quot;)
 
 
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre></details></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-1#4" aria-label="Step 4 done"><div class="step-body"><p>Run the self-check until it says <code>14 of 14 checks passed</code>.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#5" aria-label="Step 5 done"><div class="step-body"><p>Run the self-check until it says <code>12 of 12 checks passed</code>. Then test the edges by hand. Your teacher's hidden checks use other customers, bad input, and amounts exactly on your thresholds.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-1#6" aria-label="Step 6 done"><div class="step-body"><p>Create <code>NOTES.md</code> in the same folder. Write one bug you hit and how you fixed it (3 to 5 sentences).</p></div></div>
 <details class="fix"><summary>If it did not work</summary><ul>
 <li><strong><code>FAIL</code> but your numbers look right</strong>: compare the text letter by letter. Look for a missing <code>$</code>, a missing space, or <code>26.1</code> instead of <code>26.10</code>.</li>
-<li><strong>"Your program stopped with an error"</strong>: read the last line of the message. It names the line number and the problem (see Class 1, Reading errors).</li>
-<li><strong><code>ValueError</code> on <code>int(...)</code></strong>: the self-check types whole numbers. Make sure you convert with <code>int(input(...))</code> and you did not add extra text to the prompt answers.</li>
+<li><strong>"it stopped with an error"</strong>: read the last line of the message. It names the line and the problem (see Class 1, Reading errors).</li>
+<li><strong><code>ValueError</code> on <code>int(...)</code></strong>: you converted before you checked. Check with <code>.isdigit()</code> first, then convert.</li>
+<li><strong>The discount is wrong at exactly the threshold</strong>: read your rule again. It says "over" or "at least". These are <code>&gt;</code> and <code>&gt;=</code>.</li>
 <li><strong>The self-check cannot find <code>lunch_rush.py</code></strong>: it must be in the same folder and have exactly that name.</li>
+<li><strong><code>No module named variants</code></strong>: save <code>variants.py</code> in the same folder as the self-check.</li>
 </ul></details>
-<section class="evidence"><h3>📤 Hand this in</h3><p>Put <code>lunch_rush.py</code> in a folder called <code>assignment-1</code> in your GitHub repo (use the website upload from Appendix B). Hand in your <strong>repo link</strong>.</p></section>
+<h2>Keep it honest</h2>
+<ul>
+<li>Write the code yourself. Talking about ideas is fine. Copying a file is not.</li>
+<li>Your numbers are different from your classmates', so copied code gives wrong answers.</li>
+<li>Your teacher may ask you to explain any part of your code in a <strong>2-minute live chat</strong>. An assignment you cannot explain will not get the "Correct results" marks.</li>
+<li>Include <code>NOTES.md</code> with one bug you hit and how you fixed it.</li>
+</ul>
+<section class="evidence"><h3>📤 Hand this in</h3><p>Hand in <code>lunch_rush.py</code> and <code>NOTES.md</code> inside a folder called <code>assignment-1</code>, using the website upload (Appendix B, "Hand in one file without Git"). Type your GitHub username in the hand-in form so your numbers can be checked.</p></section>
 <h2>Rubric (20 points)</h2>
 <table>
 <thead>
@@ -178,29 +284,29 @@ if __name__ == &quot;__main__&quot;:
 <tr>
 <td>Correct results</td>
 <td>10</td>
-<td>Self-check: all 14 checks pass (about 0.7 point each)</td>
-</tr>
-<tr>
-<td>Uses the skills</td>
-<td>4</td>
-<td><code>input</code> with <code>int</code>, <code>if/elif/else</code> for the discount, a <code>for</code> loop, f-strings with money</td>
+<td><strong>Automatic.</strong> The teacher's hidden tests, with your own numbers, edge amounts and bad input</td>
 </tr>
 <tr>
 <td>Clear code</td>
+<td>4</td>
+<td>Good names, your numbers kept in named variables, helpful comments, no copy-pasted blocks</td>
+</tr>
+<tr>
+<td>Handling bad input</td>
 <td>3</td>
-<td>Good variable names, a few helpful comments, no copy-pasted blocks</td>
+<td>Every input is checked with a loop that asks again; no crash on anything typed</td>
 </tr>
 <tr>
 <td>Hand-in</td>
 <td>3</td>
-<td>Right file name, right folder, repo link works</td>
+<td>Right file names, right folder, <code>NOTES.md</code> has a real bug story</td>
 </tr>
 </tbody>
 </table>
 <h2>Stretch (optional, no marks)</h2>
 <ul>
-<li>Reject a negative number of coffees and ask again.</li>
-<li>Print a small thank-you line that changes with the total, such as <code>Big spender!</code> over $50.</li>
+<li>Print a small thank-you line that changes with the total, such as <code>Big spender!</code>.</li>
+<li>Show the <strong>smallest</strong> receipt too, and which customer had it.</li>
 </ul>
     
   </main>
@@ -209,6 +315,7 @@ if __name__ == &quot;__main__&quot;:
 <div class="modal progress-modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title"><h2 id="pm-title">Copy my progress</h2><p>Type your name, then copy this and paste it in the class chat.</p><label>Your name <input type="text" class="pm-name" autocomplete="name"></label><textarea class="pm-text" readonly rows="9" aria-label="Your progress"></textarea><div class="pm-actions"><button class="btn big pm-copy" type="button">Copy</button> <button class="btn pm-close" type="button">Close</button></div><p class="pm-msg" role="status"></p></div></div>
 <canvas class="confetti" aria-hidden="true"></canvas>
 <script src="../assets/data.js"></script>
+<script src="../assets/variants.js"></script>
 <script src="../assets/runner.js"></script>
 <script src="../assets/widgets.js"></script>
 <script src="../assets/app.js"></script>

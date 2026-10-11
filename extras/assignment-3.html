@@ -38,151 +38,365 @@
     <button class="reset-progress" type="button">Reset my progress</button>
   </nav>
   <main class="content" id="main">
-    <div class="crumb">📝 Assignments</div><h1>Assignment 3. Messy Orders</h1><p><strong>Skills:</strong> reading CSV files, <code>try</code> / <code>except</code>, classes, pandas <code>groupby</code>, a matplotlib chart. <strong>Time:</strong> about 2 hours.</p>
+    <div class="crumb">📝 Assignments</div><h1>Assignment 3. Messy Orders</h1><p><strong>Skills:</strong> reading CSV files, <code>try</code> / <code>except</code>, classes, pandas <code>groupby</code>, a matplotlib chart. <strong>Time:</strong> about 3 hours.</p>
 <h2>The story</h2>
-<p>Luis typed a month of orders into <code>orders.csv</code>. Some rows are wrong: a quantity of <code>two</code>, a blank quantity, <code>-1</code> coffees,
-even a product called <strong>Cookie</strong> that Campus Bites does not sell. Amina wants a clean file and a chart.</p>
-<h2>What you must do</h2>
-<p>Your file is called <code>messy_orders.py</code> and uses the two data files <code>orders.csv</code> and <code>menu.csv</code>.</p>
+<p>Luis typed a month of orders into <code>orders.csv</code>. Some rows are wrong: a quantity of <code>two</code>, a blank quantity, <code>-1</code> coffees, even a product called <strong>Cookie</strong> that Campus Bites does not sell. Amina wants a clean file, a short report, and a chart.</p>
+<p>Amina has her own rules about what counts. <strong>Your rules are personal.</strong> Type your GitHub username below to see them.</p>
+<section class="variant-card" data-aid="a3"><h3>🔢 Your numbers</h3><p>Every student gets different numbers, worked out from the GitHub username. Type yours to see them. Your program and your self-check use these.</p><label>GitHub username <input class="variant-user" type="text" autocomplete="off" spellcheck="false" placeholder="your-username"></label><div class="variant-out" aria-live="polite"></div></section>
+<h2>Your rules</h2>
+<p>Every rule below uses a number or word from your card. Your classmates have different ones.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Your value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum quantity per order (a bigger quantity is bad)</td>
+<td><span data-var="max_qty"></span></td>
+</tr>
+<tr>
+<td>Name rule</td>
+<td><span data-var="name_rule"></span></td>
+</tr>
+<tr>
+<td>What to do with <strong>Cookie</strong></td>
+<td><span data-var="cookie_rule"></span></td>
+</tr>
+<tr>
+<td>Best day is the day with the most</td>
+<td><span data-var="best_metric"></span></td>
+</tr>
+<tr>
+<td>Top products cut-off (dollars of revenue)</td>
+<td>$<span data-var="min_revenue"></span></td>
+</tr>
+<tr>
+<td>First day that counts</td>
+<td><span data-var="start_date"></span></td>
+</tr>
+<tr>
+<td>Last day that counts</td>
+<td><span data-var="end_date"></span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Name rule <code>exact</code>:</strong> use the product text exactly as typed. <code>coffee</code> and <code>Coffee</code> do not match <code>Coffee</code>.</li>
+<li><strong>Name rule <code>tidy</code>:</strong> first remove spaces from both ends, then make it title case (<code>.strip().title()</code>). So <code>iced TEA</code> becomes <code>Iced Tea</code>.</li>
+<li><strong>Cookie <code>bad</code>:</strong> a Cookie row is a normal unknown product.</li>
+<li><strong>Cookie is a product name</strong> (for example <code>Muffin</code>): after the name rule, change the name <code>Cookie</code> to that product, then continue as usual. Count each such row in the <strong>Aliased rows</strong> line.</li>
+<li><strong>Best day:</strong> <code>revenue</code> means the most revenue. <code>profit</code> means the most profit.</li>
+</ul>
+<h2>Money words</h2>
+<ul>
+<li><strong>revenue</strong> = price times quantity, rounded to 2 decimals.</li>
+<li><strong>profit</strong> = (price minus cost) times quantity, rounded to 2 decimals.</li>
+<li><code>menu.csv</code> has three columns: <code>product,price,cost</code>.</li>
+</ul>
+<h2>What your program must do</h2>
+<p>Your file is called <code>messy_orders.py</code>. It must read <code>orders.csv</code> and <code>menu.csv</code> <strong>from the current folder every time it runs</strong>. Do not type prices or product names into your code. Marking runs your program on a <strong>different, smaller <code>orders.csv</code> and <code>menu.csv</code></strong> with tricky rows, so a program with copied numbers fails.</p>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#1" aria-label="Step 1 done"><div class="step-body"><p><strong>Class <code>Order</code>.</strong> Put it in <code>messy_orders.py</code> with a docstring. It needs:</p>
+<ul>
+<li><code>__init__(self, order_id, date, product, quantity, price, cost)</code> that stores all six as attributes with the same names.</li>
+<li><code>revenue()</code> and <code>profit()</code> that return numbers rounded to 2 decimals.</li>
+<li><code>__str__</code> that returns exactly <code>O0004 | 2026-03-01 | Muffin x2 | revenue $6.50 | profit $4.30</code> (your own values, same shape).</li>
+<li><code>__eq__</code> that says two orders are equal when their <code>order_id</code> is the same. Comparing with anything that is not an <code>Order</code> gives <code>False</code> and no error.</li>
+</ul>
+<p>The class must work on its own: it must not use any other name from your file.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#2" aria-label="Step 2 done"><div class="step-body"><p><strong>Read the files.</strong> Read <code>menu.csv</code> into a dictionary. Read <code>orders.csv</code> with <code>csv.DictReader</code>. If either file is missing, print <code>Missing file: menu.csv</code> (or <code>Missing file: orders.csv</code>) and stop. No traceback. Check <code>menu.csv</code> first.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#3" aria-label="Step 3 done"><div class="step-body"><p><strong>Judge every row, in exactly this order.</strong> The first test a row meets decides what happens to it. Trim spaces from the <code>order_id</code>, the <code>date</code> and the <code>quantity</code> text before you use them.</p>
 <ol>
-<li>Read <code>menu.csv</code> into a <code>PRICES</code> dictionary.</li>
-<li>Make a class <code>Order</code> with <code>order_id</code>, <code>date</code>, <code>product</code>, <code>quantity</code>, and a method <code>revenue()</code> (price times quantity, rounded to 2 decimals).</li>
-<li>Read <code>orders.csv</code> with <code>csv.DictReader</code>. A row is <strong>bad</strong> if the quantity is not a whole number, is 0 or less, or the product is not on the menu. Use <code>try</code> / <code>except</code>. Count the bad rows.</li>
-<li>Print the number of good rows and bad rows.</li>
-<li>Put the good orders in a pandas <strong>DataFrame</strong> with the columns <code>order_id, date, product, quantity, revenue</code>. Save it as <code>clean_orders.csv</code>.</li>
-<li>Use <code>groupby</code> to print the <strong>top product</strong> by revenue and the <strong>best day</strong> by revenue.</li>
-<li>Draw a <strong>bar chart</strong> of revenue by product (with a title and a y label) and save it as <code>revenue_by_product.png</code>.</li>
+<li><strong>bad date:</strong> the date is not written exactly <code>YYYY-MM-DD</code> or is not a real day (<code>2026-02-30</code>, <code>March 5</code>, an empty date).</li>
+<li><strong>outside the window:</strong> the date is before your first day or after your last day. Your first and last days <strong>count</strong>. These rows are skipped. They are <strong>not</strong> bad rows.</li>
+<li><strong>unknown product:</strong> apply your name rule, then your Cookie rule, then look the name up in the menu. Not found means bad.</li>
+<li><strong>quantity not a number:</strong> <code>int()</code> raises <code>ValueError</code> (for <code>two</code>, an empty cell, <code>2.5</code>). Use <code>try</code> / <code>except</code>.</li>
+<li><strong>quantity 0 or less.</strong></li>
+<li><strong>quantity over your maximum.</strong> A quantity equal to your maximum is fine.</li>
+<li><strong>duplicate order id:</strong> an order with this <code>order_id</code> is already accepted. The first accepted row stays. Use your <code>__eq__</code> to test this. A row that was bad does not block a later row with the same id.</li>
 </ol>
-<h2>What your output looks like</h2>
-<pre><code>Good rows: 282
-Bad rows: 12
-Top product: Coffee ($1426.50)
-Best day: 2026-03-04 ($152.50)
+<p>A row that passes all seven is a <strong>good row</strong>.</p></div></div>
+<h2>What your program prints</h2>
+<p>Print these lines, in this order. Words, spaces and punctuation must match. Replace the angle brackets with your numbers. Spaces at the start of a line do not matter.</p>
+<pre><code>Window: &lt;first day&gt; to &lt;last day&gt;
+Rows read: &lt;number of rows DictReader gave you&gt;
+Outside window: &lt;number&gt;
+Good rows: &lt;number&gt;
+Bad rows: &lt;number&gt;
+  bad date: &lt;number&gt;
+  unknown product: &lt;number&gt;
+  quantity not a number: &lt;number&gt;
+  quantity 0 or less: &lt;number&gt;
+  quantity over &lt;your maximum&gt;: &lt;number&gt;
+  duplicate order id: &lt;number&gt;
+Aliased rows: &lt;number&gt;
+Top products (revenue of at least $&lt;cut-off&gt;):
+1. &lt;product&gt;: $&lt;revenue&gt;
+2. &lt;product&gt;: $&lt;revenue&gt;
+Best day by &lt;revenue or profit&gt;: &lt;date&gt; ($&lt;total&gt;)
+Weekday summary:
+Monday: &lt;n&gt; orders, revenue $&lt;revenue&gt;, profit $&lt;profit&gt;
+Tuesday: &lt;n&gt; orders, revenue $&lt;revenue&gt;, profit $&lt;profit&gt;
+First 3 orders:
+&lt;str of order 1&gt;
+&lt;str of order 2&gt;
+&lt;str of order 3&gt;
 </code></pre>
-<aside class="callout note"><p>The self-check looks for these exact lines. If your numbers differ, your bad-row rule probably differs. Re-read step 3.</p></aside>
+<ul>
+<li>Print all six reasons even when a count is 0. Use your own maximum in the <code>quantity over</code> line.</li>
+<li><strong>Top products:</strong> add up revenue per product over good rows, round each total to 2 decimals, keep products whose total is <strong>at least</strong> the cut-off, and list them from most to least revenue (same revenue: product name A to Z). Number them from 1. If none reach the cut-off, print one line, <code>(none)</code>.</li>
+<li><strong>Best day:</strong> add up your chosen money (revenue or profit) per date over good rows, rounded to 2 decimals. If two days tie, the earlier date wins.</li>
+<li><strong>Weekday summary:</strong> one line per weekday that has at least one good row, from Monday to Sunday. Use full English day names.</li>
+<li><strong>First 3 orders:</strong> print <code>str(order)</code> for the first three good orders in the order of <code>clean_orders.csv</code> (fewer if there are fewer).</li>
+<li>All money is printed with 2 decimals and a <code>$</code>.</li>
+</ul>
+<h2>The files your program writes</h2>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#4" aria-label="Step 4 done"><div class="step-body"><p><strong><code>clean_orders.csv</code>:</strong> built from a pandas <strong>DataFrame</strong> of the good rows. Exactly these six columns, in this order: <code>order_id,date,product,quantity,revenue,profit</code>. No index column. Revenue and profit have exactly 2 decimals (<code>float_format="%.2f"</code>). <code>product</code> is the final name after your rules. Sort the rows by <code>date</code>, then by <code>order_id</code>.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#5" aria-label="Step 5 done"><div class="step-body"><p><strong><code>revenue_by_product.png</code>:</strong> a bar chart of revenue per product (all good rows, every product) with a <strong>title</strong> and a <strong>y label</strong>. Put <code>matplotlib.use("Agg")</code> before <code>import matplotlib.pyplot</code>. Do not call <code>plt.show()</code>. The marking program checks that the file is a real picture. Your teacher looks at it.</p></div></div>
+<p>Use <code>groupby</code> for the top products, the best day and the weekday summary.</p>
 <h2>Steps</h2>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-3#1" aria-label="Step 1 done"><div class="step-body"><p>Make a folder <code>assignment-3</code>. Download <code>orders.csv</code> and <code>menu.csv</code> into it.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#6" aria-label="Step 6 done"><div class="step-body"><p>Make a folder <code>assignment-3</code> inside your <code>python-course</code> folder. Open that folder in VS Code.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#7" aria-label="Step 7 done"><div class="step-body"><p>Download the two data files into it. Do not change them.</p></div></div>
 <div class="file" data-name="menu.csv"><div class="file-head"><span>📄 menu.csv</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><pre><code>product,price,cost
 Coffee,4.5,1.5
 Muffin,3.25,1.1
 Tea,3.0,0.6
 Sandwich,6.5,2.8
 </code></pre></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-3#2" aria-label="Step 2 done"><div class="step-body"><p>Download the <code>orders.csv</code> data file using the button below (it is a long file, so we do not show it here).</p></div></div>
 <p><a class="btn" href="../downloads/orders.csv" download>⬇ Download orders.csv</a></p>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-3#3" aria-label="Step 3 done"><div class="step-body"><p>Download the starter and save it as <code>messy_orders.py</code> in the same folder.</p></div></div>
-<div class="file" data-name="messy_orders.py"><div class="file-head"><span>📄 messy_orders.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><pre><code># Assignment 3: Messy Orders
-# File name: messy_orders.py   (save this starter under that name)
-# Put orders.csv and menu.csv in the same folder as this file.
-import csv
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#8" aria-label="Step 8 done"><div class="step-body"><p>Download <code>variants.py</code> into the same folder. The self-check needs it.</p></div></div>
+<p><a class="btn" href="../downloads/variants.py" download>⬇ Download variants.py</a></p>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#9" aria-label="Step 9 done"><div class="step-body"><p>Create <code>messy_orders.py</code> from scratch. There is no starter. Build it in this order and run after each part: the <code>Order</code> class, the menu, the row judging with the bad-row counts, the printed lines, <code>clean_orders.csv</code>, the summaries, the chart.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#10" aria-label="Step 10 done"><div class="step-body"><p>If a library is missing, install it. In the VS Code terminal: Mac <code>python3 -m pip install pandas matplotlib</code>, Windows <code>python -m pip install pandas matplotlib</code>.</p></div></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#11" aria-label="Step 11 done"><div class="step-body"><p>Download the self-check, run it, type your GitHub username, and fix every <code>FAIL</code>. It shows what it expected.</p></div></div>
+<div class="file" data-name="a3_selfcheck.py"><div class="file-head"><span>📄 a3_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 3. Put it next to messy_orders.py and variants.py, then run it.
 
-import matplotlib
-matplotlib.use(&quot;Agg&quot;)          # lets charts be saved to a file on any computer
-import matplotlib.pyplot as plt
-import pandas as pd
-
-
-# TODO 1: read menu.csv and make a dictionary PRICES like {&quot;Coffee&quot;: 4.5, ...}
-
-
-class Order:
-    # TODO 2: __init__ takes order_id, date, product, quantity and stores them.
-    #         Add a method revenue() that returns price * quantity, rounded to 2 decimals.
-    pass
-
-
-# TODO 3: read orders.csv with csv.DictReader.
-#   A row is BAD if the quantity is not a whole number, the quantity is 0 or less,
-#   or the product is not in PRICES. Use try/except. Make an Order for every good row.
-#   Count the bad rows.
-
-# TODO 4: print the counts, for example:
-#   Good rows: 100
-#   Bad rows: 5
-
-# TODO 5: put the good orders in a pandas DataFrame with the columns
-#   order_id, date, product, quantity, revenue
-#   and save it with:  table.to_csv(&quot;clean_orders.csv&quot;, index=False)
-
-# TODO 6: use groupby to print the top product and the best day, for example:
-#   Top product: Coffee ($1426.50)
-#   Best day: 2026-03-04 ($152.50)
-
-# TODO 7: draw a bar chart of revenue by product, with a title and a y label,
-#   and save it as revenue_by_product.png
-</code></pre></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-3#4" aria-label="Step 4 done"><div class="step-body"><p>Do the <code>TODO</code> notes in order. Run after each one.</p></div></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-3#5" aria-label="Step 5 done"><div class="step-body"><p>If a library is missing, install it. In the VS Code terminal: Mac <code>python3 -m pip install pandas matplotlib</code>, Windows <code>python -m pip install pandas matplotlib</code>.</p></div></div>
-<div class="step"><input type="checkbox" data-tick="extras/assignment-3#6" aria-label="Step 6 done"><div class="step-body"><p>Download the self-check into the same folder, run it, and fix every <code>FAIL</code>.</p></div></div>
-<div class="file" data-name="a3_selfcheck.py"><div class="file-head"><span>📄 a3_selfcheck.py</span><span class="try-btns"><button class="btn ghost dl-file" type="button">⬇ Download</button><button class="btn ghost copy-file" type="button">Copy</button></span></div><details class="file-code"><summary>Show the code</summary><pre><code>&quot;&quot;&quot;Self-check for Assignment 3. Put it next to messy_orders.py, orders.csv and menu.csv, then run it.&quot;&quot;&quot;
+It builds a tiny orders.csv and menu.csv in a temporary folder, runs YOUR messy_orders.py on them,
+and checks the answers for YOUR personal rules. Your own orders.csv and menu.csv are not touched.
+The real marking uses more files and more tricky rows, so a pass here is a good sign, not a mark.
+&quot;&quot;&quot;
 import ast
 import csv
+import datetime
+import json
+import os
+import shutil
 import subprocess
 import sys
+import tempfile
+from decimal import Decimal
+from pathlib import Path
 
+from variants import pick
+
+USERNAME = &quot;&quot;  # you may type your GitHub username here, or leave it empty and type it when asked
+username = USERNAME or input(&quot;GitHub username: &quot;)
+v = pick(&quot;a3&quot;, username)
+MAXQ, START, END = int(v[&quot;max_qty&quot;]), v[&quot;start_date&quot;], v[&quot;end_date&quot;]
+TIDY, COOKIE, METRIC = v[&quot;name_rule&quot;] == &quot;tidy&quot;, v[&quot;cookie_rule&quot;], v[&quot;best_metric&quot;]
+print(f&quot;Your rules: max quantity {MAXQ}, names {v[&#x27;name_rule&#x27;]}, Cookie {COOKIE}, best day by {METRIC}, &quot;
+      f&quot;cut-off ${float(v[&#x27;min_revenue&#x27;]):.2f}, window {START} to {END}\n&quot;)
+
+here = Path.cwd()
+script = here / &quot;messy_orders.py&quot;
 results = []
 
 
 def check(label, test):
     try:
-        ok = bool(test())
-    except Exception as e:
-        ok = False
-        label += f&quot;   (error: {type(e).__name__}: {e})&quot;
+        outcome = test()
+        ok, extra = (outcome if isinstance(outcome, tuple) else (bool(outcome), &quot;&quot;))
+    except Exception as e:  # noqa: BLE001
+        ok, extra = False, f&quot;error: {type(e).__name__}: {e}&quot;
     results.append(ok)
-    print((&quot;PASS  &quot; if ok else &quot;FAIL  &quot;) + label)
+    print((&quot;PASS  &quot; if ok else &quot;FAIL  &quot;) + label + (f&quot;   ({extra})&quot; if extra and not ok else &quot;&quot;))
+
+
+if not script.is_file():
+    sys.exit(&quot;Could not find messy_orders.py in this folder. Open the assignment-3 folder in VS Code and run again.&quot;)
+src = script.read_text(encoding=&quot;utf-8&quot;)
+try:
+    tree = ast.parse(src)
+except SyntaxError as e:
+    sys.exit(f&quot;messy_orders.py has a syntax error: {e}&quot;)
+
+# ---- a tiny data set. Dates move with YOUR window. Every row tests one rule.
+S = datetime.date.fromisoformat(START)
+E = datetime.date.fromisoformat(END)
+d = lambda n: (S + datetime.timedelta(days=n)).isoformat()  # noqa: E731
+rows = [  # id, date, product, quantity, what we expect
+    (&quot;M01&quot;, d(0), &quot;Coffee&quot;, &quot;1&quot;, &quot;good&quot;),
+    (&quot;M02&quot;, d(1), &quot;Tea&quot;, str(MAXQ), &quot;good&quot;),
+    (&quot;M03&quot;, d(1), &quot;Muffin&quot;, str(MAXQ + 1), f&quot;quantity over {MAXQ}&quot;),
+    (&quot;M04&quot;, d(2), &quot;Muffin&quot;, &quot;two&quot;, &quot;quantity not a number&quot;),
+    (&quot;M05&quot;, d(2), &quot;Tea&quot;, &quot;0&quot;, &quot;quantity 0 or less&quot;),
+    (&quot;M06&quot;, d(3), &quot;Waffle&quot;, &quot;1&quot;, &quot;unknown product&quot;),
+    (&quot;M07&quot;, (S - datetime.timedelta(days=1)).isoformat(), &quot;Coffee&quot;, &quot;1&quot;, &quot;outside&quot;),
+    (&quot;M08&quot;, (E + datetime.timedelta(days=1)).isoformat(), &quot;Tea&quot;, &quot;1&quot;, &quot;outside&quot;),
+    (&quot;M09&quot;, E.isoformat(), &quot;Muffin&quot;, &quot;2&quot;, &quot;good&quot;),
+    (&quot;M10&quot;, d(3), &quot;Cookie&quot;, &quot;1&quot;, &quot;good-alias&quot; if COOKIE != &quot;bad&quot; else &quot;unknown product&quot;),
+    (&quot;M11&quot;, d(4), &quot;  coffee &quot;, &quot;1&quot;, &quot;good&quot; if TIDY else &quot;unknown product&quot;),
+    (&quot;M01&quot;, d(4), &quot;Coffee&quot;, &quot;2&quot;, &quot;duplicate order id&quot;),
+    (&quot;M13&quot;, &quot;2026-13-45&quot;, &quot;Tea&quot;, &quot;1&quot;, &quot;bad date&quot;),
+]
+MENU = {&quot;Coffee&quot;: (&quot;4.00&quot;, &quot;1.00&quot;), &quot;Tea&quot;: (&quot;2.00&quot;, &quot;0.50&quot;), &quot;Muffin&quot;: (&quot;3.00&quot;, &quot;1.20&quot;)}
+good, counts, outside, aliased = [], {}, 0, 0
+for oid, day, prod, qty, what in rows:
+    if what == &quot;outside&quot;:
+        outside += 1
+    elif what.startswith(&quot;good&quot;):
+        name = {&quot;good-alias&quot;: COOKIE}.get(what, prod.strip().title())
+        good.append((oid, day, name, int(qty)))
+        aliased += what == &quot;good-alias&quot;
+    else:
+        counts[what] = counts.get(what, 0) + 1
+good.sort(key=lambda g: (g[1], g[0]))
+
+
+def money(x):
+    return f&quot;{Decimal(x).quantize(Decimal(&#x27;0.01&#x27;)):.2f}&quot;
+
+
+def totals(name_qty):
+    _, _, name, qty = name_qty
+    price, cost = (Decimal(x) for x in MENU[name])
+    return price * qty, (price - cost) * qty
+
+
+per_day = {}
+for g in good:
+    rev, prof = totals(g)
+    per_day[g[1]] = per_day.get(g[1], Decimal(0)) + (rev if METRIC == &quot;revenue&quot; else prof)
+best_day = max(sorted(per_day), key=lambda k: per_day[k])
+bad_total = sum(counts.values())
+labels = [(&quot;bad date&quot;, &quot;bad date&quot;), (&quot;unknown product&quot;, &quot;unknown product&quot;), (&quot;quantity not a number&quot;, &quot;quantity not a number&quot;),
+          (&quot;quantity 0 or less&quot;, &quot;quantity 0 or less&quot;), (f&quot;quantity over {MAXQ}&quot;, f&quot;quantity over {MAXQ}&quot;),
+          (&quot;duplicate order id&quot;, &quot;duplicate order id&quot;)]
+
+work = Path(tempfile.mkdtemp(prefix=&quot;a3check_&quot;))
+shutil.copy(script, work / &quot;messy_orders.py&quot;)
+with open(work / &quot;orders.csv&quot;, &quot;w&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+    w = csv.writer(f)
+    w.writerow([&quot;order_id&quot;, &quot;date&quot;, &quot;product&quot;, &quot;quantity&quot;, &quot;channel&quot;])
+    for oid, day, prod, qty, _ in rows:
+        w.writerow([oid, day, prod, qty, &quot;pickup&quot;])
+with open(work / &quot;menu.csv&quot;, &quot;w&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+    w = csv.writer(f)
+    w.writerow([&quot;product&quot;, &quot;price&quot;, &quot;cost&quot;])
+    for name, (price, cost) in MENU.items():
+        w.writerow([name, price, cost])
+
+
+def run(folder, code_args=(&quot;messy_orders.py&quot;,), timeout=30):
+    env = dict(os.environ, MPLBACKEND=&quot;Agg&quot;)
+    return subprocess.run([sys.executable, *code_args], cwd=folder, capture_output=True, text=True, timeout=timeout, env=env)
 
 
 try:
-    src = open(&quot;messy_orders.py&quot;, encoding=&quot;utf-8&quot;).read()
-    tree = ast.parse(src)
-except Exception as e:
-    sys.exit(f&quot;Could not read messy_orders.py: {type(e).__name__}: {e}&quot;)
-
-run = subprocess.run([sys.executable, &quot;messy_orders.py&quot;], capture_output=True, text=True, timeout=120)
-if run.returncode != 0:
-    print(&quot;Your program stopped with an error:\n&quot;)
-    print(run.stderr.strip()[-700:] or &quot;(no message)&quot;)
-    sys.exit(1)
-out = run.stdout
-
-classes = {n.name: n for n in ast.walk(tree) if isinstance(n, ast.ClassDef)}
-check(&quot;has a class called Order&quot;, lambda: &quot;Order&quot; in classes)
-check(&quot;Order has a revenue method&quot;, lambda: any(isinstance(f, ast.FunctionDef) and f.name == &quot;revenue&quot; for f in classes[&quot;Order&quot;].body))
-check(&quot;uses try/except&quot;, lambda: any(isinstance(n, ast.Try) for n in ast.walk(tree)))
-check(&quot;uses pandas&quot;, lambda: &quot;pandas&quot; in src)
-check(&quot;prints 282 good rows&quot;, lambda: &quot;Good rows: 282&quot; in out)
-check(&quot;prints 12 bad rows&quot;, lambda: &quot;Bad rows: 12&quot; in out)
-check(&quot;prints the top product&quot;, lambda: &quot;Top product: Coffee ($1426.50)&quot; in out)
-check(&quot;prints the best day&quot;, lambda: &quot;Best day: 2026-03-04 ($152.50)&quot; in out)
+    p = run(work)
+except subprocess.TimeoutExpired:
+    sys.exit(&quot;Your program did not finish in 30 seconds. Is there a loop that never ends?&quot;)
+lines = [l.strip() for l in p.stdout.splitlines()]
 
 
-def clean_file():
-    with open(&quot;clean_orders.csv&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
-        rows = list(csv.DictReader(f))
-    return len(rows) == 282 and set(rows[0]) &gt;= {&quot;order_id&quot;, &quot;date&quot;, &quot;product&quot;, &quot;quantity&quot;, &quot;revenue&quot;}
+def line_is(expected):
+    prefix = expected.split(&quot;:&quot;)[0] + &quot;:&quot;
+    got = next((l for l in lines if l.startswith(prefix)), &quot;no such line&quot;)
+    return expected in lines, f&quot;expected &#x27;{expected}&#x27;, your program printed &#x27;{got}&#x27;&quot;
 
 
-check(&quot;clean_orders.csv has 282 rows and the right columns&quot;, clean_file)
+check(&quot;program runs on the small test files without an error&quot;,
+      lambda: (p.returncode == 0, (p.stderr.strip().splitlines() or [&quot;no message&quot;])[-1]))
+check(&quot;prints Rows read and Outside window&quot;, lambda: (
+    line_is(f&quot;Rows read: {len(rows)}&quot;)[0] and line_is(f&quot;Outside window: {outside}&quot;)[0],
+    f&quot;expected &#x27;Rows read: {len(rows)}&#x27; and &#x27;Outside window: {outside}&#x27;&quot;))
+check(&quot;prints Good rows&quot;, lambda: line_is(f&quot;Good rows: {len(good)}&quot;))
+check(&quot;prints Bad rows&quot;, lambda: line_is(f&quot;Bad rows: {bad_total}&quot;))
+check(&quot;prints the bad-row breakdown, one exact line per reason&quot;, lambda: (
+    all(f&quot;{lab}: {counts.get(key, 0)}&quot; in lines for lab, key in labels),
+    &quot;expected: &quot; + &quot;, &quot;.join(f&quot;&#x27;{lab}: {counts.get(key, 0)}&#x27;&quot; for lab, key in labels)))
+check(&quot;prints Aliased rows&quot;, lambda: line_is(f&quot;Aliased rows: {aliased}&quot;))
+check(&quot;prints the best day&quot;, lambda: line_is(f&quot;Best day by {METRIC}: {best_day} (${money(per_day[best_day])})&quot;))
 
 
-def chart_file():
-    with open(&quot;revenue_by_product.png&quot;, &quot;rb&quot;) as f:
-        head = f.read(8)
-    return head == b&quot;\x89PNG\r\n\x1a\n&quot;
+def csv_file():
+    with open(work / &quot;clean_orders.csv&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+        table = list(csv.reader(f))
+    want_head = [&quot;order_id&quot;, &quot;date&quot;, &quot;product&quot;, &quot;quantity&quot;, &quot;revenue&quot;, &quot;profit&quot;]
+    if table[0] != want_head:
+        return False, f&quot;header is {table[0]}&quot;
+    want = [[oid, day, name, str(qty), money(totals((oid, day, name, qty))[0]), money(totals((oid, day, name, qty))[1])]
+            for oid, day, name, qty in good]
+    if table[1:] != want:
+        first = next((i for i, (a, b) in enumerate(zip(table[1:], want)) if a != b), min(len(table) - 1, len(want)))
+        return False, f&quot;row {first + 1}: expected {want[first] if first &lt; len(want) else &#x27;no row&#x27;}, got {table[1:][first] if first &lt; len(table) - 1 else &#x27;no row&#x27;}&quot;
+    return True, &quot;&quot;
 
 
-check(&quot;revenue_by_product.png is a picture&quot;, chart_file)
-print(f&quot;\n{sum(results)} of {len(results)} checks passed.&quot;)
+check(&quot;clean_orders.csv has the right columns, cells and sort order&quot;, csv_file)
+
+
+def class_tests():
+    cls = next((n for n in ast.walk(tree) if isinstance(n, ast.ClassDef) and n.name == &quot;Order&quot;), None)
+    if cls is None:
+        return False, &quot;no class called Order&quot;
+    code = (&quot;import json\n&quot; + ast.get_source_segment(src, cls) + &quot;\n&quot;
+            &quot;a = Order(&#x27;O1&#x27;, &#x27;2026-03-01&#x27;, &#x27;Coffee&#x27;, 3, 4.5, 1.5)\n&quot;
+            &quot;b = Order(&#x27;O1&#x27;, &#x27;2030-05-05&#x27;, &#x27;Tea&#x27;, 1, 3.0, 0.5)\n&quot;
+            &quot;c = Order(&#x27;O2&#x27;, &#x27;2026-03-01&#x27;, &#x27;Coffee&#x27;, 3, 4.5, 1.5)\n&quot;
+            &quot;print(json.dumps([str(a), a.revenue(), a.profit(), a == b, a == c, a == &#x27;O1&#x27;]))\n&quot;)
+    q = run(work, (&quot;-c&quot;, code), 10)
+    if q.returncode != 0:
+        return False, (q.stderr.strip().splitlines() or [&quot;error&quot;])[-1]
+    text, rev, prof, same_id, other_id, other_type = json.loads(q.stdout.strip().splitlines()[-1])
+    return {&quot;text&quot;: text, &quot;rev&quot;: rev, &quot;prof&quot;: prof, &quot;same&quot;: same_id, &quot;other&quot;: other_id, &quot;type&quot;: other_type}, &quot;&quot;
+
+
+holder = {}
+
+
+def order_str():
+    out, note = class_tests()
+    if not isinstance(out, dict):
+        return False, note
+    holder.update(out)
+    want = &quot;O1 | 2026-03-01 | Coffee x3 | revenue $13.50 | profit $9.00&quot;
+    return out[&quot;text&quot;] == want and out[&quot;rev&quot;] == 13.5 and out[&quot;prof&quot;] == 9.0, f&quot;str(order) gave &#x27;{out[&#x27;text&#x27;]}&#x27;&quot;
+
+
+check(&quot;Order: revenue(), profit() and __str__ in the exact format&quot;, order_str)
+check(&quot;Order: __eq__ compares order_id only (and False for other types)&quot;, lambda: (
+    holder.get(&quot;same&quot;) is True and holder.get(&quot;other&quot;) is False and holder.get(&quot;type&quot;) is False, f&quot;got {holder}&quot;))
+
+
+def chart():
+    data = (work / &quot;revenue_by_product.png&quot;).read_bytes()
+    return data[:8] == b&quot;\x89PNG\r\n\x1a\n&quot; and len(data) &gt; 4000, &quot;revenue_by_product.png missing or not a real picture&quot;
+
+
+check(&quot;revenue_by_product.png is a real picture&quot;, chart)
+names = {getattr(n.func, &quot;attr&quot;, getattr(n.func, &quot;id&quot;, &quot;&quot;)) for n in ast.walk(tree) if isinstance(n, ast.Call)}
+check(&quot;uses csv.DictReader, try/except and groupby&quot;, lambda: (
+    &quot;DictReader&quot; in names and &quot;groupby&quot; in names and any(isinstance(n, ast.Try) for n in ast.walk(tree)),
+    &quot;one of DictReader, try/except, groupby is missing&quot;))
+shutil.rmtree(work, ignore_errors=True)
+print(f&quot;\n{sum(results)} of {len(results)} checks passed&quot;)
 </code></pre></details></div>
+<div class="step"><input type="checkbox" data-tick="extras/assignment-3#12" aria-label="Step 12 done"><div class="step-body"><p>Commit and push as you work. Add <code>NOTES.md</code> (see the integrity rules below).</p></div></div>
 <details class="fix"><summary>If it did not work</summary><ul>
 <li><strong><code>ModuleNotFoundError: No module named 'pandas'</code></strong>: run the install command above, then run again.</li>
 <li><strong><code>FileNotFoundError: orders.csv</code></strong>: the data files must be in the same folder as your script, and you must open that <strong>folder</strong> in VS Code.</li>
-<li><strong>Wrong bad-row count</strong>: remember three kinds of bad rows: words like <code>two</code> (use <code>int()</code> and catch <code>ValueError</code>), numbers 0 or less, and products not on the menu.</li>
-<li><strong>No chart file appears</strong>: call <code>plt.savefig("revenue_by_product.png")</code> before anything that clears the figure.</li>
-<li><strong>A window pops up and the program waits</strong>: you used <code>plt.show()</code>. Remove it. Saving the file is enough.</li>
+<li><strong><code>ModuleNotFoundError: No module named 'variants'</code></strong>: download <code>variants.py</code> into the same folder as the self-check.</li>
+<li><strong>A count is off by a few</strong>: re-read the seven tests. The order matters. A row with a bad date and an unknown product is a <strong>bad date</strong> row.</li>
+<li><strong><code>clean_orders.csv</code> shows <code>4.5</code> not <code>4.50</code></strong>: pass <code>float_format="%.2f"</code> to <code>to_csv</code>.</li>
+<li><strong>No chart file appears</strong>: call <code>plt.savefig("revenue_by_product.png")</code> and do not call <code>plt.show()</code>.</li>
+<li><strong>Best day is wrong</strong>: check your card. Do you use revenue or profit?</li>
 </ul></details>
-<section class="evidence"><h3>📤 Hand this in</h3><p>Put <code>messy_orders.py</code>, <code>clean_orders.csv</code> and <code>revenue_by_product.png</code> in a folder called <code>assignment-3</code> in your GitHub repo (commit and push). Hand in your <strong>repo link</strong>.</p></section>
+<h2>How your work is marked</h2>
+<p>The marking program runs your <code>messy_orders.py</code> several times: on the real files, on a hidden file with tricky rows (extra spaces, capital letters, 0, negative, text, blank, huge quantities, days on the edge of your window), and with a missing file. It compares your printed lines and every cell of <code>clean_orders.csv</code> with the right answer for <strong>your</strong> rules.</p>
+<section class="evidence"><h3>📤 Hand this in</h3><p>Put <code>messy_orders.py</code>, <code>clean_orders.csv</code>, <code>revenue_by_product.png</code> and <code>NOTES.md</code> in a folder called <code>assignment-3</code> in your GitHub repo (commit and push). Hand in your <strong>repo link</strong>.</p></section>
 <h2>Rubric (20 points)</h2>
 <table>
 <thead>
@@ -196,34 +410,36 @@ print(f&quot;\n{sum(results)} of {len(results)} checks passed.&quot;)
 <tr>
 <td>Correct results</td>
 <td>10</td>
-<td>Self-check: all 10 checks pass (1 point each)</td>
-</tr>
-<tr>
-<td>Uses the skills</td>
-<td>3</td>
-<td><code>try/except</code> for bad rows, an <code>Order</code> class with a method, <code>groupby</code></td>
-</tr>
-<tr>
-<td>Chart quality</td>
-<td>2</td>
-<td>Readable bars, a title, a y label</td>
+<td>Automatic: hidden checks on your own rules</td>
 </tr>
 <tr>
 <td>Clear code</td>
-<td>2</td>
-<td>Good names, short comments, no repeated code</td>
+<td>4</td>
+<td>Good names, short functions, comments where needed, no repeated code</td>
 </tr>
 <tr>
-<td>Hand-in</td>
+<td>Handling bad input</td>
 <td>3</td>
-<td>Right file names, right folder, committed with a clear message</td>
+<td><code>try</code> / <code>except</code> used well, every bad row counted by its reason, missing files handled</td>
+</tr>
+<tr>
+<td>Submission and evidence</td>
+<td>3</td>
+<td>Right names and folder, 4+ commits on 2+ days, <code>NOTES.md</code>, chart with title and y label</td>
 </tr>
 </tbody>
 </table>
+<h2>Integrity: your own work</h2>
+<ul>
+<li>Commit <strong>at least 4 times over at least 2 different days or sessions</strong>. Commit messages must say what you did (for example "Order class with revenue and profit").</li>
+<li>Add a <code>NOTES.md</code> that lists <strong>one bug you hit and how you fixed it</strong>.</li>
+<li>You may be asked to <strong>explain any part of your code in a 2-minute live chat</strong>. An assignment you cannot explain will not get the <strong>Correct results</strong> marks.</li>
+<li>Your numbers are your own. A classmate's working program fails your marking program.</li>
+</ul>
 <h2>Stretch (optional, no marks)</h2>
 <ul>
 <li>Add a second chart: revenue per day as a line chart.</li>
-<li>Print how many bad rows there were for each reason.</li>
+<li>Show the profit margin (profit divided by revenue) for each product.</li>
 </ul>
     
   </main>
@@ -232,6 +448,7 @@ print(f&quot;\n{sum(results)} of {len(results)} checks passed.&quot;)
 <div class="modal progress-modal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pm-title"><h2 id="pm-title">Copy my progress</h2><p>Type your name, then copy this and paste it in the class chat.</p><label>Your name <input type="text" class="pm-name" autocomplete="name"></label><textarea class="pm-text" readonly rows="9" aria-label="Your progress"></textarea><div class="pm-actions"><button class="btn big pm-copy" type="button">Copy</button> <button class="btn pm-close" type="button">Close</button></div><p class="pm-msg" role="status"></p></div></div>
 <canvas class="confetti" aria-hidden="true"></canvas>
 <script src="../assets/data.js"></script>
+<script src="../assets/variants.js"></script>
 <script src="../assets/runner.js"></script>
 <script src="../assets/widgets.js"></script>
 <script src="../assets/app.js"></script>
